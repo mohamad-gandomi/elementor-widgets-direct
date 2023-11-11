@@ -220,10 +220,12 @@ final class Plugin {
 		require_once( __DIR__ . '/widgets/FAQ.php' );
 		require_once( __DIR__ . '/widgets/testimonial.php' );
 		require_once( __DIR__ . '/widgets/recomended_hotels.php' );
+		require_once( __DIR__ . '/widgets/hero.php' );
 
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_FAQ_Widget() );
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Testimonial_Widget() );
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Recomended_Hotels_Widget() );
+		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Hero_Widget() );
 
 	}
 
