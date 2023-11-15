@@ -239,6 +239,7 @@ final class Plugin {
 		require_once( __DIR__ . '/widgets/video.php' );
 		require_once( __DIR__ . '/widgets/counter.php' );
 		require_once( __DIR__ . '/widgets/customer.php' );
+		require_once( __DIR__ . '/widgets/blog.php' );
 
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Hero_Widget() );
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Ticker_Widget() );
@@ -248,6 +249,7 @@ final class Plugin {
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Video_Widget() );
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Counter_Widget() );
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Customer_Widget() );
+		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Blog_Widget() );
 
 	}
 
