@@ -235,11 +235,13 @@ final class Plugin {
 		require_once( __DIR__ . '/widgets/ticker.php' );
 		require_once( __DIR__ . '/widgets/why_choice_us.php' );
 		require_once( __DIR__ . '/widgets/special_title.php' );
+		require_once( __DIR__ . '/widgets/product.php' );
 
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Hero_Widget() );
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Ticker_Widget() );
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Why_Choice_Us_Widget() );
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Special_Title_Widget() );
+		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Product_Widget() );
 
 	}
 

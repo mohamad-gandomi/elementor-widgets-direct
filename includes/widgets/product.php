@@ -5,13 +5,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 /**
- * Elementor Why Choice Us Widget.
+ * Elementor Ticker Widget.
  *
- * Elementor widget that inserts Why_Choice_Us messages in a customize way with filters
+ * Elementor widget that inserts Product messages in a customize way with filters
  *
  * @since 1.0.0
  */
-class Elementor_Why_Choice_Us_Widget extends \Elementor\Widget_Base {
+class Elementor_Product_Widget extends \Elementor\Widget_Base {
 
 	public function __construct($data = [], $args = null) {
 		parent::__construct($data, $args);
@@ -20,7 +20,7 @@ class Elementor_Why_Choice_Us_Widget extends \Elementor\Widget_Base {
 	/**
 	 * Get widget styles.
 	 *
-	 * Retrieve Why_Choice_Us widget styles.
+	 * Retrieve Product widget styles.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -31,7 +31,7 @@ class Elementor_Why_Choice_Us_Widget extends \Elementor\Widget_Base {
 	/**
 	 * Get widget scripts.
 	 *
-	 * Retrieve Why_Choice_Us widget scripts.
+	 * Retrieve Product widget scripts.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -42,40 +42,40 @@ class Elementor_Why_Choice_Us_Widget extends \Elementor\Widget_Base {
 	/**
 	 * Get widget name.
 	 *
-	 * Retrieve Why_Choice_Us widget name.
+	 * Retrieve Product widget name.
 	 *
 	 * @since 1.0.0
 	 * @access public
 	 * @return string Widget name.
 	 */
 	public function get_name() {
-		return 'Why Choice Us';
+		return 'Product';
 	}
 
 	/**
 	 * Get widget title.
 	 *
-	 * Retrieve Why Choice Us widget title.
+	 * Retrieve Product widget title.
 	 *
 	 * @since 1.0.0
 	 * @access public
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return esc_html__( 'Why Choice Us', 'elementor-widgets-direct' );
+		return esc_html__( 'Product', 'elementor-widgets-direct' );
 	}
 
 	/**
 	 * Get widget icon.
 	 *
-	 * Retrieve Why Choice Us widget icon.
+	 * Retrieve Product widget icon.
 	 *
 	 * @since 1.0.0
 	 * @access public
 	 * @return string Widget icon.
 	 */
 	public function get_icon() {
-		return 'eicon-banner';
+		return 'eicon-single-product';
 	}
 
 	/**
@@ -94,7 +94,7 @@ class Elementor_Why_Choice_Us_Widget extends \Elementor\Widget_Base {
 	/**
 	 * Get widget categories.
 	 *
-	 * Retrieve the Why Choice Us of categories the Why Choice Us widget belongs to.
+	 * Retrieve the Product of categories the Product widget belongs to.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -107,18 +107,18 @@ class Elementor_Why_Choice_Us_Widget extends \Elementor\Widget_Base {
 	/**
 	 * Get widget keywords.
 	 *
-	 * Retrieve the Why Choice Us of keywords the Why Choice Us widget belongs to.
+	 * Retrieve the Product of keywords the Product widget belongs to.
 	 *
 	 * @since 1.0.0
 	 * @access public
 	 * @return array Widget keywords.
 	 */
 	public function get_keywords() {
-		return ['Why Choice Us'];
+		return ['Product'];
 	}
 
 	/**
-	 * Register Why Choice Us widget controls.
+	 * Register Product widget controls.
 	 *
 	 * Add input fields to allow the user to customize the widget settings.
 	 *
@@ -130,44 +130,15 @@ class Elementor_Why_Choice_Us_Widget extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'content_section',
 			[
-				'label' => esc_html__( 'Why Choice Us Content', 'elementor-widgets-direct' ),
+				'label' => esc_html__( 'Product Content', 'elementor-widgets-direct' ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
 			]
 		);
 
-        /* Start repeater */
-		$repeater = new \Elementor\Repeater();
-
-        $repeater->add_control(
-			'why_choice_us_number',
+        $this->add_control(
+			'product_image',
 			[
-				'label' => esc_html__( 'Number', 'elementor-widgets-direct' ),
-				'type' => \Elementor\Controls_Manager::NUMBER,
-				'min' => 1,
-				'step' => 1,
-			]
-		);
-
-        $repeater->add_control(
-			'why_choice_us_title',
-			[
-				'label' => esc_html__( 'Title', 'elementor-widgets-direct' ),
-				'type' => \Elementor\Controls_Manager::TEXT,
-			]
-		);
-
-        $repeater->add_control(
-			'why_choice_us_description',
-			[
-				'label' => esc_html__( 'Description', 'elementor-widgets-direct' ),
-				'type' => \Elementor\Controls_Manager::TEXTAREA,
-			]
-		);
-
-        $repeater->add_control(
-			'why_choice_us_image',
-			[
-				'label' => esc_html__( 'Choose Image', 'elementor-widgets-direct' ),
+				'label' => esc_html__( 'Choice Image', 'elementor-widgets-direct' ),
 				'type' => \Elementor\Controls_Manager::MEDIA,
 				'default' => [
 					'url' => \Elementor\Utils::get_placeholder_image_src(),
@@ -175,68 +146,79 @@ class Elementor_Why_Choice_Us_Widget extends \Elementor\Widget_Base {
 			]
 		);
 
+        $this->add_control(
+			'product_title',
+			[
+				'label' => esc_html__( 'Title', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+			]
+		);
+
+        $this->add_control(
+			'product_description',
+			[
+				'label' => esc_html__( 'Description', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::TEXTAREA,
+			]
+		);
+
+		$this->add_control(
+			'product_link_title',
+			[
+				'label' => esc_html__( 'Button', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+			]
+		);
+
+        $this->add_control(
+			'product_link',
+			[
+				'label' => esc_html__( 'Link', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::URL,
+				'options' => [ 'url', 'is_external', 'nofollow' ],
+				'default' => [
+					'url' => '',
+					'is_external' => true,
+					'nofollow' => true,
+					// 'custom_attributes' => '',
+				],
+				'label_block' => true,
+			]
+		);
+
+        /* Start repeater */
+		$repeater = new \Elementor\Repeater();
+
+        $repeater->add_control(
+			'product_info',
+			[
+				'label' => esc_html__( 'Item', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'label_block' => true,
+				'dynamic' => [
+					'active' => true,
+				],
+			]
+		);
+
         /* End repeater */
 		$this->add_control(
-			'why_choice_us_items',
+			'product_items',
 			[
-				'label' => esc_html__( 'Items', 'elementor-widgets-direct' ),
+				'label' => esc_html__( 'Product Items', 'elementor-widgets-direct' ),
 				'type' => \Elementor\Controls_Manager::REPEATER,
 				'fields' => $repeater->get_controls(),
 
-				'title_field' => '{{{ why_choice_us_title }}}',
+				'title_field' => '{{{ product_info }}}',
 			]
 		);
 
-		$this->end_controls_section();
+        $this->end_controls_section();
 
-
-		/* Number Style Tab */
-		$this->start_controls_section(
-			'wcu_number_style',
-			[
-				'label' => esc_html__( 'Number', 'elementor-widgets-direct' ),
-				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
-			]
-		);
-
-		$this->add_control(
-			'wcu_number_color_dark',
-			[
-				'label' => esc_html__( 'Dark Mode Color', 'elementor-widgets-direct' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
-				'selectors' => [
-					'[data-bs-theme="dark"] {{WRAPPER}} .direct-card__number' => 'color: {{VALUE}}',
-				],
-			]
-		);
-
-		$this->add_control(
-			'wcu_number_color_light',
-			[
-				'label' => esc_html__( 'Light Mode Color', 'elementor-widgets-direct' ),
-				'type' => \Elementor\Controls_Manager::COLOR,
-				'selectors' => [
-					'[data-bs-theme="light"] {{WRAPPER}} .direct-card__number' => 'color: {{VALUE}}',
-				],
-			]
-		);
-
-		$this->add_group_control(
-			\Elementor\Group_Control_Typography::get_type(),
-			[
-				'name' => 'wcu_number_typography',
-				'selector' => '{{WRAPPER}} .direct-card__number',
-				'global' => [
-					'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_PRIMARY,
-				],
-			]
-		);
-
-		$this->end_controls_section();
 
 		/* Title Style Tab */
 		$this->start_controls_section(
-			'wcu_title_style',
+			'product_style',
 			[
 				'label' => esc_html__( 'Title', 'elementor-widgets-direct' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
@@ -244,7 +226,7 @@ class Elementor_Why_Choice_Us_Widget extends \Elementor\Widget_Base {
 		);
 
 		$this->add_control(
-			'wcu_title_color_dark',
+			'title_color_dark',
 			[
 				'label' => esc_html__( 'Dark Mode Color', 'elementor-widgets-direct' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
@@ -255,7 +237,7 @@ class Elementor_Why_Choice_Us_Widget extends \Elementor\Widget_Base {
 		);
 
 		$this->add_control(
-			'wcu_title_color_light',
+			'title_color_light',
 			[
 				'label' => esc_html__( 'Light Mode Color', 'elementor-widgets-direct' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
@@ -268,7 +250,7 @@ class Elementor_Why_Choice_Us_Widget extends \Elementor\Widget_Base {
 		$this->add_group_control(
 			\Elementor\Group_Control_Typography::get_type(),
 			[
-				'name' => 'wcu_title_typography',
+				'name' => 'title_typography',
 				'selector' => '{{WRAPPER}} h3',
 				'global' => [
 					'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_PRIMARY,
@@ -278,10 +260,9 @@ class Elementor_Why_Choice_Us_Widget extends \Elementor\Widget_Base {
 
 		$this->end_controls_section();
 
-		
-		/* Text Style Tab */
+		/* Description Style Tab */
 		$this->start_controls_section(
-			'wcu_text_style',
+			'product_description_style',
 			[
 				'label' => esc_html__( 'Description', 'elementor-widgets-direct' ),
 				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
@@ -289,23 +270,23 @@ class Elementor_Why_Choice_Us_Widget extends \Elementor\Widget_Base {
 		);
 
 		$this->add_control(
-			'wcu_text_color_dark',
+			'product_description_color_dark',
 			[
 				'label' => esc_html__( 'Dark Mode Color', 'elementor-widgets-direct' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
-					'[data-bs-theme="dark"] {{WRAPPER}} .direct-card__text' => 'color: {{VALUE}}',
+					'[data-bs-theme="dark"] {{WRAPPER}} p' => 'color: {{VALUE}}',
 				],
 			]
 		);
 
 		$this->add_control(
-			'wcu_text_color_light',
+			'product_description_color_light',
 			[
 				'label' => esc_html__( 'Light Mode Color', 'elementor-widgets-direct' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
-					'[data-bs-theme="light"] {{WRAPPER}} .direct-card__text' => 'color: {{VALUE}}',
+					'[data-bs-theme="light"] {{WRAPPER}} p' => 'color: {{VALUE}}',
 				],
 			]
 		);
@@ -313,13 +294,59 @@ class Elementor_Why_Choice_Us_Widget extends \Elementor\Widget_Base {
 		$this->add_group_control(
 			\Elementor\Group_Control_Typography::get_type(),
 			[
-				'name' => 'wcu_text_typography',
-				'selector' => '{{WRAPPER}} .direct-card__text',
+				'name' => 'product_description_typography',
+				'selector' => '{{WRAPPER}} p',
 				'global' => [
 					'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_PRIMARY,
 				],
 			]
 		);
+
+		$this->end_controls_section();
+
+		/* Items Style Tab */
+		$this->start_controls_section(
+			'product_item_style',
+			[
+				'label' => esc_html__( 'Items', 'elementor-widgets-direct' ),
+				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$this->add_control(
+			'product_item_color_dark',
+			[
+				'label' => esc_html__( 'Dark Mode Color', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'[data-bs-theme="dark"] {{WRAPPER}} ul' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+		$this->add_control(
+			'product_item_color_light',
+			[
+				'label' => esc_html__( 'Light Mode Color', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'[data-bs-theme="light"] {{WRAPPER}} ul' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'product_item_typography',
+				'selector' => '{{WRAPPER}} ul',
+				'global' => [
+					'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_PRIMARY,
+				],
+			]
+		);
+
+		$this->end_controls_section();
 
 	}
 
@@ -336,49 +363,43 @@ class Elementor_Why_Choice_Us_Widget extends \Elementor\Widget_Base {
 		$settings = $this->get_settings_for_display();
 
         ?>
-        <!-- WHY CHOICE US
+        <!-- PRODUCTS
         ================================================== -->
-        <section class="why-choose-us position-relative">
+        <section class="direct-products">
             <div class="container">
-
-
-
-                <!-- Cards -->
+                <!-- Products Cards -->
                 <div class="row">
-                    <?php
-                    foreach ( $settings['why_choice_us_items'] as $index => $item ) {
-                        $number = $settings['why_choice_us_items'][$index]['why_choice_us_number'];
-                        $title = $settings['why_choice_us_items'][$index]['why_choice_us_title'];
-                        $description = $settings['why_choice_us_items'][$index]['why_choice_us_description'];
-                        $image = $settings['why_choice_us_items'][$index]['why_choice_us_image'];
-                    ?>
-                        <!-- Card -->
-                        <div class="col-12 col-xl-4 mb-8 mb-xl-0">
-                            <div class="direct-card rounded-6 px-7 pb-7 pt-10">
-                                <div class="d-flex mb-10">
-                                    <span class="font-pinar ms-6 direct-card__number"><?php echo $number; ?></span>
-                                    <div>
-                                        <h3 class="mb-4"><?php echo $title; ?></h3>
-                                        <p class="mb-2 direct-card__text"><?php echo $description; ?></p>
-                                    </div>
-                                </div>
-                                <div>
-                                    <img class="w-100" src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" >
-                                </div>
-                            </div>
+
+                    <!-- Product Card -->
+                    <div class="direct-card d-flex flex-column flex-md-row bg-gray-800 rounded-6 p-6">
+                        <div class="mx-auto mb-7 mb-md-0 ms-md-9 d-flex align-items-center">
+                            <img class="p-2" src="<?php echo $settings['product_image']['url']; ?>" alt="<?php echo $settings['product_image']['alt']; ?>" >
                         </div>
-                    <?php
-                    }    
-                    ?>
+                        <div>
+                            <h3 class="mb-4"><?php echo $settings['product_title']; ?></h3>
+                            <p class="mb-7"><?php echo $settings['product_description']; ?></p>
+                            <ul class="mb-7">
+								<?php
+								foreach ( $settings['product_items'] as $index => $item ) {
+									?>
+									<li class="mb-5 d-flex align-items-center">
+										<span class="icon-tick-bulk fs-3 text-success ms-3">
+											<span class="path1"></span>
+											<span class="path2"></span>
+										</span>
+										<span><?php echo $settings['product_items'][$index]['product_info']; ?></span>
+									</li>
+									<?php
+								}
+								?>
+                            </ul>
+                            <a href="<?php echo $settings['product_link']['url']; ?>" rel="<?php echo $settings['product_link']['nofollow'] == 'on' ? 'nofollow': ''; ?>" class="btn btn-primary w-100 text-white-500 p-3 fw-500 rounded-3"><?php echo $settings['product_link_title']; ?></a>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-            <div class="light bg-secondary position-absolute top-100 start-100 translate-middle"></div>
         </section>
         <?php
-
-
-
     }
-
-
 }
