@@ -28,9 +28,7 @@ class Elementor_Ticker_Widget extends \Elementor\Widget_Base {
 	 * @access public
 	 * @return string Widget styles.
 	 */
-	public function get_style_depends() {
-		//return [ 'Ticker' ];
-	}
+	//public function get_style_depends() {}
 
 	/**
 	 * Get widget scripts.
@@ -41,9 +39,7 @@ class Elementor_Ticker_Widget extends \Elementor\Widget_Base {
 	 * @access public
 	 * @return string Widget scripts.
 	 */
-	public function get_script_depends() {
-		//return [ 'Ticker' ];
-	}
+	//public function get_script_depends() {}
 
 	/**
 	 * Get widget name.
@@ -107,7 +103,7 @@ class Elementor_Ticker_Widget extends \Elementor\Widget_Base {
 	 * @return array Widget categories.
 	 */
 	public function get_categories() {
-		return [ 'general' ];
+		return [ 'direct-category' ];
 	}
 
 	/**

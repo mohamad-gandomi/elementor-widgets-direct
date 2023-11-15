@@ -202,7 +202,21 @@ final class Plugin {
 
 		// Add Plugin actions
 		add_action( 'elementor/widgets/register', [ $this, 'register_widgets' ] );
+		add_action( 'elementor/elements/categories_registered', [ $this, 'add_elementor_widget_categories' ] );
 		//add_action( 'elementor/controls/register', [ $this, 'register_controls' ] );
+
+	}
+
+
+	public function add_elementor_widget_categories( $elements_manager ) {
+
+		$elements_manager->add_category(
+			'direct-category',
+			[
+				'title' => esc_html__( 'Direct Elements', 'elementor-widgets-direct' ),
+				'icon' => 'fa fa-plug',
+			]
+		);
 
 	}
 
@@ -219,9 +233,13 @@ final class Plugin {
 
 		require_once( __DIR__ . '/widgets/hero.php' );
 		require_once( __DIR__ . '/widgets/ticker.php' );
+		require_once( __DIR__ . '/widgets/why_choice_us.php' );
+		require_once( __DIR__ . '/widgets/special_title.php' );
 
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Hero_Widget() );
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Ticker_Widget() );
+		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Why_Choice_Us_Widget() );
+		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Special_Title_Widget() );
 
 	}
 
