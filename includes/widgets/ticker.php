@@ -15,8 +15,8 @@ class Elementor_Ticker_Widget extends \Elementor\Widget_Base {
 
 	public function __construct($data = [], $args = null) {
 		parent::__construct($data, $args);
-		//wp_register_style( 'Ticker', EAA_PDU . 'includes/assets/css/widgets/Ticker.css' , array(), '1.0.0' );
-		//wp_register_script( 'Ticker', EAA_PDU . 'includes/assets/js/widgets/Ticker.js', ['elementor-frontend'], '1.0.0', true );
+		wp_register_script( 'swiper-bundle', EAA_PDU . 'includes/assets/js/widgets/swiper-bundle.min.js', [], '1.0.0', true );
+        wp_register_script( 'ticker', EAA_PDU . 'includes/assets/js/widgets/ticker.js', ['elementor-frontend'], '1.0.0', true );
 	}
 
 	/**
@@ -39,7 +39,9 @@ class Elementor_Ticker_Widget extends \Elementor\Widget_Base {
 	 * @access public
 	 * @return string Widget scripts.
 	 */
-	//public function get_script_depends() {}
+	public function get_script_depends() {
+		return [ 'ticker', 'swiper-bundle' ];
+	}
 
 	/**
 	 * Get widget name.

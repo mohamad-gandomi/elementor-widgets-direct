@@ -203,7 +203,6 @@ final class Plugin {
 		// Add Plugin actions
 		add_action( 'elementor/widgets/register', [ $this, 'register_widgets' ] );
 		add_action( 'elementor/elements/categories_registered', [ $this, 'add_elementor_widget_categories' ] );
-		//add_action( 'elementor/controls/register', [ $this, 'register_controls' ] );
 
 	}
 
@@ -240,6 +239,8 @@ final class Plugin {
 		require_once( __DIR__ . '/widgets/counter.php' );
 		require_once( __DIR__ . '/widgets/customer.php' );
 		require_once( __DIR__ . '/widgets/blog.php' );
+		require_once( __DIR__ . '/widgets/logo_slider.php' );
+		require_once( __DIR__ . '/widgets/video_slider.php' );
 
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Hero_Widget() );
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Ticker_Widget() );
@@ -250,6 +251,8 @@ final class Plugin {
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Counter_Widget() );
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Customer_Widget() );
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Blog_Widget() );
+		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Logo_Slider_Widget() );
+		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Video_Slider_Widget() );
 
 	}
 
