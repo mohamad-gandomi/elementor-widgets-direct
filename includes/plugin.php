@@ -241,6 +241,7 @@ final class Plugin {
 		require_once( __DIR__ . '/widgets/blog.php' );
 		require_once( __DIR__ . '/widgets/logo_slider.php' );
 		require_once( __DIR__ . '/widgets/video_slider.php' );
+		require_once( __DIR__ . '/widgets/testimonials.php' );
 
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Hero_Widget() );
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Ticker_Widget() );
@@ -253,6 +254,7 @@ final class Plugin {
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Blog_Widget() );
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Logo_Slider_Widget() );
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Video_Slider_Widget() );
+		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Testimonials_Widget() );
 
 	}
 

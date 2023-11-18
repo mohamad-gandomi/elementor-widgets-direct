@@ -18,6 +18,7 @@ class Testimonials extends elementorModules.frontend.handlers.Base {
                 },
             }
         });
+
     }
 }
 

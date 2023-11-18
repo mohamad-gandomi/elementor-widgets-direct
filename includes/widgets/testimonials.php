@@ -66,7 +66,7 @@ class Elementor_Testimonials_Widget extends \Elementor\Widget_Base {
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return esc_html__( 'Video Slider', 'elementor-widgets-direct' );
+		return esc_html__( 'Testimonials', 'elementor-widgets-direct' );
 	}
 
 	/**
@@ -79,7 +79,7 @@ class Elementor_Testimonials_Widget extends \Elementor\Widget_Base {
 	 * @return string Widget icon.
 	 */
 	public function get_icon() {
-		return 'eicon-slider-video';
+		return 'eicon-testimonial-carousel';
 	}
 
 	/**
@@ -174,18 +174,150 @@ class Elementor_Testimonials_Widget extends \Elementor\Widget_Base {
 			]
 		);
 
-
         /* End repeater */
 		$this->add_control(
-			'video_items',
+			'testimonial_items',
 			[
-				'label' => esc_html__( 'Video Items', 'elementor-widgets-direct' ),
+				'label' => esc_html__( 'Item', 'elementor-widgets-direct' ),
 				'type' => \Elementor\Controls_Manager::REPEATER,
 				'fields' => $repeater->get_controls(),
+
+				'title_field' => '{{{ title }}}',
 			]
 		);
 
 		$this->end_controls_section();
+
+		/* Title Style Tab */
+		$this->start_controls_section(
+			'title_style',
+			[
+				'label' => esc_html__( 'Title', 'elementor-widgets-direct' ),
+				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$this->add_control(
+			'testimonial_title_color_dark',
+			[
+				'label' => esc_html__( 'Dark Mode Color', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'[data-bs-theme="dark"] {{WRAPPER}} h4' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+		$this->add_control(
+			'testimonial_title_color_light',
+			[
+				'label' => esc_html__( 'Light Mode Color', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'[data-bs-theme="light"] {{WRAPPER}} h4' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'testimonial_title_typography',
+				'selector' => '{{WRAPPER}} h4',
+				'global' => [
+					'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_PRIMARY,
+				],
+			]
+		);
+
+		$this->end_controls_section();
+
+		/* Subtitel Style Tab */
+		$this->start_controls_section(
+			'testimonials_subtitle_style',
+			[
+				'label' => esc_html__( 'Subtitle', 'elementor-widgets-direct' ),
+				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$this->add_control(
+			'testimonials_subtitle_color_dark',
+			[
+				'label' => esc_html__( 'Dark Mode Color', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'[data-bs-theme="dark"] {{WRAPPER}} .customer-testimonials-carousel__card__subtitle' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+		$this->add_control(
+			'testimonials_subtitle_color_light',
+			[
+				'label' => esc_html__( 'Light Mode Color', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'[data-bs-theme="light"] {{WRAPPER}} .customer-testimonials-carousel__card__subtitle' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'testimonials_subtitle_typography',
+				'selector' => '{{WRAPPER}} .customer-testimonials-carousel__card__subtitle',
+				'global' => [
+					'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_PRIMARY,
+				],
+			]
+		);
+
+		$this->end_controls_section();
+
+		
+		/* Text Style Tab */
+		$this->start_controls_section(
+			'testimonials_message_style',
+			[
+				'label' => esc_html__( 'Message', 'elementor-widgets-direct' ),
+				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$this->add_control(
+			'testimonials_message_color_dark',
+			[
+				'label' => esc_html__( 'Dark Mode Color', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'[data-bs-theme="dark"] {{WRAPPER}} .customer-testimonials-carousel__card__message' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+		$this->add_control(
+			'testimonials_message_color_light',
+			[
+				'label' => esc_html__( 'Light Mode Color', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'selectors' => [
+					'[data-bs-theme="light"] {{WRAPPER}} .customer-testimonials-carousel__card__message' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'testimonials_message_typography',
+				'selector' => '{{WRAPPER}} .customer-testimonials-carousel__card__message',
+				'global' => [
+					'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_PRIMARY,
+				],
+			]
+		);
 
 	}
 
@@ -202,32 +334,34 @@ class Elementor_Testimonials_Widget extends \Elementor\Widget_Base {
 		$settings = $this->get_settings_for_display();
 
         ?>
-        <!-- VIDEO CAROUSEL
+        <!-- CUSTOMER TESTIMONIALS
         ================================================== -->
         <!-- Carousel main container -->
-        <div class="video-carousel swiper">
+        <div class="customer-testimonials-carousel swiper">
             <!-- Additional required wrapper -->
             <div class="swiper-wrapper">
-                <?php
-                    foreach ( $settings['video_items'] as $index => $item ) {
-                        ?>
-                        <!-- Slide -->
-                        <div class="swiper-slide w-auto">
-                            <img 
-                                role="button" 
-                                class="" 
-                                src="<?php echo $settings['video_items'][$index]['video_poster']['url']; ?>"
-                                alt="<?php echo $settings['video_items'][$index]['video_poster']['alt']; ?>"
-								data-bs-toggle="modal" 
-								data-bs-target="#exampleModal<?php echo $index; ?>"
-                            >
-                        </div>
-                        <?php
-                    }
-                ?>
+				<?php foreach ( $settings['testimonial_items'] as $index => $item ) { ?>
+					<!-- Slide -->
+					<div class="swiper-slide">
+						<div class="customer-testimonials-carousel__card bg-gray-800 rounded-3 p-6">
+							<div class="mb-3 d-flex align-items-center justify-content-between">
+								<div class="d-flex">
+									<div class="ms-3 d-flex align-items-center">
+										<img src="<?php echo $settings['testimonial_items'][$index]['image']['url']; ?>" alt="<?php echo $settings['testimonial_items'][$index]['image']['alt']; ?>" >
+									</div>
+									<div>
+										<h4 class="mb-1"><?php echo $settings['testimonial_items'][$index]['title']; ?></h4>
+										<span class="font-pinar customer-testimonials-carousel__card__subtitle"><?php echo $settings['testimonial_items'][$index]['subtitle']; ?></span>
+									</div>
+								</div>
+								<span class="quote-mark text-gray-600">”</span>
+							</div>
+							<p class="customer-testimonials-carousel__card__message mb-0"><?php echo $settings['testimonial_items'][$index]['message']; ?></p>
+						</div>
+					</div>
+				<?php } ?>
             </div>
         </div>
-
 	   <?php
     }
 
