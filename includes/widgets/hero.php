@@ -213,6 +213,20 @@ class Elementor_Hero_Widget extends \Elementor\Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'hero_video',
+			[
+				'label' => esc_html__( 'Choose Video File', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::MEDIA,
+				'media_types' => [ 'video' ],
+				'default' => [
+					'url' => \Elementor\Utils::get_placeholder_image_src(),
+				],
+			]
+		);
+
+		$this->end_controls_section();
+
 	}
 
 	/**
@@ -264,11 +278,13 @@ class Elementor_Hero_Widget extends \Elementor\Widget_Base {
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-xl-6 d-none d-xl-block">
-                        <?php $hero_image = get_field('hero_image'); ?>
-                        <?php if( !empty( $hero_image ) ): ?>
-                            <img class="w-100 mt-5" src="<?php echo esc_url($hero_image['url']); ?>" alt="<?php echo esc_attr($hero_image['alt']); ?>" />
-                        <?php endif; ?>
+                    <div class="col-12 col-xl-6">
+						<div class="video-container rounded-5 bg-gray-800 mt-5">
+                           <video class="w-100 rounded-5 hero_video" autoplay="" loop="" muted="muted" playsinline="" controlslist="nodownload" style="object-fit: cover;">
+                                <source src="<?php echo esc_url($settings['hero_video']['url']); ?>" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+						</div>
                     </div>
                 </div>
             </div>

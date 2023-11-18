@@ -185,7 +185,7 @@ class Elementor_Contact_Us_Widget extends \Elementor\Widget_Base {
         ?>
         <!-- CONTACT US
         ================================================== -->
-        <section class="main-contact-us mb-14 mb-xl-16">
+        <section class="main-contact-us">
             <div class="container">
                 <div class="row align-items-center">
                     <!-- Images -->
@@ -205,7 +205,7 @@ class Elementor_Contact_Us_Widget extends \Elementor\Widget_Base {
                                     <p class="m-0"><?php echo $settings['second_message']; ?></p>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>

@@ -79,7 +79,7 @@ class Elementor_Testimonials_Widget extends \Elementor\Widget_Base {
 	 * @return string Widget icon.
 	 */
 	public function get_icon() {
-		return 'eicon-testimonial-carousel';
+		return 'eicon-global-settings';
 	}
 
 	/**
