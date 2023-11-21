@@ -246,6 +246,7 @@ final class Plugin {
 		require_once( __DIR__ . '/widgets/product_form.php' );
 		require_once( __DIR__ . '/widgets/tabs.php' );
 		require_once( __DIR__ . '/widgets/direct_text.php' );
+		require_once( __DIR__ . '/widgets/features_table.php' );
 
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Hero_Widget() );
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Ticker_Widget() );
@@ -263,6 +264,7 @@ final class Plugin {
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Product_Form_Widget() );
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Tabs_Widget() );
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Direct_Text_Widget() );
+		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Features_Table_Widget() );
 
 	}
 
