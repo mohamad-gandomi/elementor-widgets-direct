@@ -384,7 +384,7 @@ class Elementor_Product_Form_Widget extends \Elementor\Widget_Base {
 							<div class="product__info__form__count mb-7 user-select-none">
 								<div class="quantity-input bg-gray-800 rounded-6 d-inline-block px-3">
 									<a class="py-1 px-2 font-poppins quantity-button bg-gray-500 rounded-circle text-light quantity-button minus">-</a>
-									<input class="display-5 text-light text-center" type="number" id="quantity" name="quantity" value="2">
+									<input class="display-5 text-light text-center" type="number" id="quantity" name="quantity" value="1">
 									<a class="py-1 px-2 font-poppins quantity-button bg-gray-500 rounded-circle text-light quantity-button plus">+</a>
 								</div>
 							</div>

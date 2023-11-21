@@ -244,6 +244,8 @@ final class Plugin {
 		require_once( __DIR__ . '/widgets/testimonials.php' );
 		require_once( __DIR__ . '/widgets/contact_us.php' );
 		require_once( __DIR__ . '/widgets/product_form.php' );
+		require_once( __DIR__ . '/widgets/tabs.php' );
+		require_once( __DIR__ . '/widgets/direct_text.php' );
 
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Hero_Widget() );
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Ticker_Widget() );
@@ -259,6 +261,8 @@ final class Plugin {
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Testimonials_Widget() );
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Contact_Us_Widget() );
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Product_Form_Widget() );
+		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Tabs_Widget() );
+		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Direct_Text_Widget() );
 
 	}
 
