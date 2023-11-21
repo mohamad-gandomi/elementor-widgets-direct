@@ -342,7 +342,7 @@ class Elementor_Testimonials_Widget extends \Elementor\Widget_Base {
             <div class="swiper-wrapper">
 				<?php foreach ( $settings['testimonial_items'] as $index => $item ) { ?>
 					<!-- Slide -->
-					<div class="swiper-slide">
+					<div class="swiper-slide w-auto" style="max-width:405px">
 						<div class="customer-testimonials-carousel__card bg-gray-800 rounded-3 p-6">
 							<div class="mb-3 d-flex align-items-center justify-content-between">
 								<div class="d-flex">
