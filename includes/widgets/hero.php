@@ -214,11 +214,39 @@ class Elementor_Hero_Widget extends \Elementor\Widget_Base {
 		);
 
 		$this->add_control(
+			'video_type',
+			[
+				'label' => esc_html__( 'Video Source', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::SELECT,
+				'default' => 'hosted',
+				'options' => [
+					'aparat' => esc_html__( 'Aparat', 'elementor-widgets-direct' ),
+					'hosted' => esc_html__( 'Self Hosted', 'elementor-widgets-direct' ),
+				],
+				'frontend_available' => true,
+			]
+		);
+
+		$this->add_control(
+			'hero_video_aparat',
+			[
+				'label' => esc_html__( 'Aparat Embed Code', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::TEXTAREA,
+				'condition' => [
+					'video_type' => ['aparat']
+				],
+			]
+		);
+
+		$this->add_control(
 			'hero_video',
 			[
 				'label' => esc_html__( 'Choose Video File', 'elementor-widgets-direct' ),
 				'type' => \Elementor\Controls_Manager::MEDIA,
 				'media_types' => [ 'video' ],
+				'condition' => [
+					'video_type' => ['hosted']
+				],
 				'default' => [
 					'url' => \Elementor\Utils::get_placeholder_image_src(),
 				],
@@ -240,6 +268,12 @@ class Elementor_Hero_Widget extends \Elementor\Widget_Base {
 	protected function render() {
 
 		$settings = $this->get_settings_for_display();
+
+		if ( 'hosted' == $settings['video_type'] ) {
+			$video = esc_url($settings['hero_video']['url']);
+		} else {
+			$video = $settings['hero_video_aparat'];
+		}
 
         ?>
         <!-- HERO
@@ -279,12 +313,18 @@ class Elementor_Hero_Widget extends \Elementor\Widget_Base {
                         </div>
                     </div>
                     <div class="col-12 col-xl-6">
-						<div class="video-container rounded-5 bg-gray-800 mt-5">
-                           <video class="w-100 rounded-5 hero_video" autoplay="" loop="" muted="muted" playsinline="" controlslist="nodownload" style="object-fit: cover;">
-                                <source src="<?php echo esc_url($settings['hero_video']['url']); ?>" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
-						</div>
+						<?php if('hosted' == $settings['video_type']): ?>
+						    <div class="video-container rounded-5 bg-gray-800 mt-5">
+								<video class="w-100 rounded-5 hero_video" autoplay="" loop="" muted="muted" playsinline="" controlslist="nodownload" style="object-fit: cover;">
+									<source src="<?php echo $video; ?>" type="video/mp4">
+									Your browser does not support the video tag.
+								</video>
+							</div>
+						<?php else: ?>
+							<div class="hero_video">
+								<?php echo $video; ?>
+							</div>
+						<?php endif; ?>
                     </div>
                 </div>
             </div>

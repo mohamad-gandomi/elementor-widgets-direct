@@ -172,6 +172,31 @@ class Elementor_Features_Table_Widget extends \Elementor\Widget_Base {
 			]
 		);
 
+		$repeater->add_control(
+			'video_type',
+			[
+				'label' => esc_html__( 'Video Source', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::SELECT,
+				'default' => 'hosted',
+				'options' => [
+					'aparat' => esc_html__( 'Aparat', 'elementor-widgets-direct' ),
+					'hosted' => esc_html__( 'Self Hosted', 'elementor-widgets-direct' ),
+				],
+				'frontend_available' => true,
+			]
+		);
+
+		$repeater->add_control(
+			'video_aparat',
+			[
+				'label' => esc_html__( 'Aparat Embed Code', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::TEXTAREA,
+				'condition' => [
+					'video_type' => ['aparat']
+				],
+			]
+		);
+
         $repeater->add_control(
 			'features_table_video',
 			[
@@ -180,6 +205,9 @@ class Elementor_Features_Table_Widget extends \Elementor\Widget_Base {
 				'media_types' => [ 'video' ],
 				'default' => [
 					'url' => \Elementor\Utils::get_placeholder_image_src(),
+				],
+				'condition' => [
+					'video_type' => ['hosted']
 				],
 			]
 		);
@@ -254,10 +282,16 @@ class Elementor_Features_Table_Widget extends \Elementor\Widget_Base {
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <video class="w-100" controls>
-                            <source src="<?php echo $settings['features_table_items'][$index]['features_table_video']['url']; ?>" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
+					<?php if('hosted' == $settings['features_table_items'][$index]['video_type']): ?>
+						<video class="w-100" controls>
+							<source src="<?php echo $settings['features_table_items'][$index]['features_table_video']['url']; ?>" type="video/mp4">
+							Your browser does not support the video tag.
+						</video>
+					<?php else: ?>
+						<div class="w-100">
+							<?php echo $settings['features_table_items'][$index]['video_aparat']; ?>
+						</div>
+					<?php endif; ?>
                     </div>
                     </div>
                 </div>

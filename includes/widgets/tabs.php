@@ -222,60 +222,72 @@ class Elementor_Tabs_Widget extends \Elementor\Widget_Base {
 
         ?>
 
-        <!-- PRODUCT TABS
-        ================================================== -->
-        <section class="product-information mb-14 mb-xl-16">
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <div class="accordion direct-product-tabs" id="accordionExample">
+		<!-- Tabs
+		================================================== -->
+		<section class="customer-club">
+			<div class="container">
+				<div class="row">
+					<!-- Features Tabs -->
+					<div class="col-12">
+						<div class="accordion direct-tabs" id="accordionExampletop">
 
-                            <!-- Features Tabs Btns -->
-                            <div class="row mx-2 direct-product-tabs__btns py-3 bg-gray-800 rounded-3 mb-12 justify-content-around">
-                                <?php foreach ( $settings['tab_contents'] as $index => $item ) { ?>
-                                    <div class="col-6 col-md-4 col-xxl-2">
-                                        <button class="fs-2 w-100 d-flex align-items-center justify-content-center btn btn-gray-900 text-white-500 px-2 px-xl-4 py-3 rounded-3 <?php echo $index !== 0 ? 'collapsed' : '' ; ?>" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne<?php echo $index; ?>" aria-expanded="<?php echo $index !== 0 ? 'false' : 'true';?>" aria-controls="collapseOne<?php echo $index; ?>">
-                                            <span class="<?php echo $settings['tab_contents'][$index]['tab_btn_icon']; ?> ms-2 fs-3">
-                                                <span class="path1"></span>
-											    <span class="path2"></span>
-											    <span class="path3"></span>
-											    <span class="path4"></span>
-											    <span class="path5"></span>
-											    <span class="path6"></span>
-											    <span class="path7"></span>
-                                                <span class="path8"></span>
-                                                <span class="path9"></span>
-                                            </span>
-                                            <?php echo $settings['tab_contents'][$index]['tab_btn_name']; ?>
-                                        </button>
-                                    </div>
-                                <?php } ?>
-                            </div>
+							<!-- Features Tabs Btns -->
+							<div class="d-flex mx-auto">
+								<div class="direct-tabs__btns p-1 bg-gray-800 rounded-3 d-inline-block mb-12 mx-auto d-inline-flex flex-wrap">
+									<?php foreach ( $settings['tab_contents'] as $index => $item ) { ?>
+											<button
+												class="<?php echo $index !== 0 ? 'collapsed' : '' ; ?> fs-2 btn btn-gray-900 text-white-500 px-5 py-3 rounded-3 d-flex align-items-center collapsed"
+												type="button"
+												data-bs-toggle="collapse"
+												data-bs-target="#collapse<?php echo $settings['tab_contents'][$index]['_id']; ?>"
+												aria-expanded="false"
+												aria-controls="collapse<?php echo $settings['tab_contents'][$index]['_id']; ?>"
+											>
+												<span class="<?php echo $settings['tab_contents'][$index]['tab_btn_icon']; ?> display-6 ms-5">
+													<span class="path1"></span>
+												    <span class="path2"></span>
+												    <span class="path3"></span>
+												    <span class="path4"></span>
+												    <span class="path5"></span>
+												    <span class="path6"></span>
+												    <span class="path7"></span>
+								                    <span class="path8"></span>
+								                    <span class="path9"></span>
+												</span>
+												<?php echo $settings['tab_contents'][$index]['tab_btn_name']; ?>
+											</button>
+								
+								    <?php } ?>
+								</div>
+							</div>
 
-                            <?php foreach ( $settings['tab_contents'] as $index => $item ) { ?>
 
-                                <?php $selected_template_id = $settings['tab_contents'][$index]['template_id']; ?>
+							<?php foreach ( $settings['tab_contents'] as $index => $item ) { ?>
 
-                                <div class="direct-product-tabs__content accordion-item bg-black-500 border-0">
-                                    <div id="collapseOne<?php echo $index; ?>" class="accordion-collapse collapse <?php echo $index == 0 ? 'show' : '' ; ?>" data-bs-parent="#accordionExample">
-                                        <div class="row align-items-center">
-                                        <?php
-                                        // Check if Elementor is active and the selected template ID is valid
-                                        if ( \Elementor\Plugin::instance()->editor->is_edit_mode() || \Elementor\Plugin::instance()->preview->is_preview_mode() || $selected_template_id ) {
-                                            // Use Elementor's frontend rendering method to display the template
-                                            echo \Elementor\Plugin::instance()->frontend->get_builder_content_for_display( $selected_template_id );
-                                        }
-                                        ?>
-                                        </div>
-                                    </div>
-                                </div>
+								<?php $selected_template_id = $settings['tab_contents'][$index]['template_id']; ?>
+
+								<?php if (!$selected_template_id) {continue;} ?>
+
+								<div class="direct-tabs__content accordion-item bg-black-500 border-0">
+									<div id="collapse<?php echo $settings['tab_contents'][$index]['_id']; ?>" class="accordion-collapse collapse <?php echo $index == 0 ? 'show' : '' ; ?>" data-bs-parent="#accordionExampletop">
+										<div class="row align-items-center flex-xl-row-reverse">
+										<?php
+											// Check if Elementor is active and the selected template ID is valid
+											if ( \Elementor\Plugin::instance()->editor->is_edit_mode() || \Elementor\Plugin::instance()->preview->is_preview_mode() || $selected_template_id ) {
+												// Use Elementor's frontend rendering method to display the template
+												echo \Elementor\Plugin::instance()->frontend->get_builder_content_for_display( $selected_template_id );
+											}
+										?>
+										</div>
+									</div>
+								</div>
+
                             <?php } ?>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
 
         <?php
 

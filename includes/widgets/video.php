@@ -159,6 +159,31 @@ class Elementor_Video_Widget extends \Elementor\Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'video_type',
+			[
+				'label' => esc_html__( 'Video Source', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::SELECT,
+				'default' => 'hosted',
+				'options' => [
+					'aparat' => esc_html__( 'Aparat', 'elementor-widgets-direct' ),
+					'hosted' => esc_html__( 'Self Hosted', 'elementor-widgets-direct' ),
+				],
+				'frontend_available' => true,
+			]
+		);
+
+		$this->add_control(
+			'video_aparat',
+			[
+				'label' => esc_html__( 'Aparat Embed Code', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::TEXTAREA,
+				'condition' => [
+					'video_type' => ['aparat']
+				],
+			]
+		);
+
         $this->add_control(
 			'video',
 			[
@@ -168,14 +193,9 @@ class Elementor_Video_Widget extends \Elementor\Widget_Base {
 				'default' => [
 					'url' => \Elementor\Utils::get_placeholder_image_src(),
 				],
-			]
-		);
-
-        $this->add_control(
-			'video_poster',
-			[
-				'label' => esc_html__( 'Choose Video Poster', 'elementor-widgets-direct' ),
-				'type' => \Elementor\Controls_Manager::MEDIA,
+				'condition' => [
+					'video_type' => ['hosted']
+				],
 			]
 		);
 
@@ -364,13 +384,26 @@ class Elementor_Video_Widget extends \Elementor\Widget_Base {
                     </div>
 
                     <!-- Video -->
+					
                     <div class="col-12 col-xl-6">
-                        <div class="video-container rounded-5 bg-gray-800">
-                            <video class="w-100 rounded-5" controls poster="<?php echo esc_url($settings['video_poster']['url']); ?>">
-                                <source src="<?php echo esc_url($settings['video']['url']); ?>" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
-                        </div>
+
+						<?php if('hosted' == $settings['video_type']): ?>
+
+						    <div class="video-container rounded-5 bg-gray-800 mt-5">
+								<video class="w-100 rounded-5 direct_video" autoplay="" loop="" muted="muted" playsinline="" controlslist="nodownload" style="object-fit: cover;">
+									<source src="<?php echo esc_url($settings['video']['url']); ?>" type="video/mp4">
+									Your browser does not support the video tag.
+								</video>
+							</div>
+
+						<?php else: ?>
+
+							<div class="direct_video">
+								<?php echo $settings['video_aparat']; ?>
+							</div>
+
+						<?php endif; ?>
+
                     </div>
                 </div>
             </div>
