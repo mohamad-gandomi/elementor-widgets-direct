@@ -224,24 +224,21 @@ class Elementor_Tabs_Widget extends \Elementor\Widget_Base {
 
 		<!-- Tabs
 		================================================== -->
-		<section class="customer-club">
+		<section class="customer-club" id="tab<?php echo $this->get_id(); ?>">
 			<div class="container">
 				<div class="row">
 					<!-- Features Tabs -->
 					<div class="col-12">
-						<div class="accordion direct-tabs" id="accordionExampletop">
+						<div class="accordion direct-tabs">
 
 							<!-- Features Tabs Btns -->
 							<div class="d-flex mx-auto">
-								<div class="direct-tabs__btns p-1 bg-gray-800 rounded-3 d-inline-block mb-12 mx-auto d-inline-flex flex-wrap">
+								<div class="direct-tabs__btns tabs p-1 bg-gray-800 rounded-3 d-inline-block mb-12 mx-auto d-inline-flex flex-wrap">
 									<?php foreach ( $settings['tab_contents'] as $index => $item ) { ?>
 											<button
-												class="<?php echo $index !== 0 ? 'collapsed' : '' ; ?> fs-2 btn btn-gray-900 text-white-500 px-5 py-3 rounded-3 d-flex align-items-center collapsed"
+												class="tablink fs-2 btn btn-gray-900 text-white-500 px-5 py-3 rounded-3 tab-button d-flex align-items-center <?php echo $index == 0 ? 'active' : '' ; ?>"
 												type="button"
-												data-bs-toggle="collapse"
-												data-bs-target="#collapse<?php echo $settings['tab_contents'][$index]['_id']; ?>"
-												aria-expanded="false"
-												aria-controls="collapse<?php echo $settings['tab_contents'][$index]['_id']; ?>"
+												data-section="section<?php echo $settings['tab_contents'][$index]['_id']; ?>"
 											>
 												<span class="<?php echo $settings['tab_contents'][$index]['tab_btn_icon']; ?> display-6 ms-5">
 													<span class="path1"></span>
@@ -266,19 +263,17 @@ class Elementor_Tabs_Widget extends \Elementor\Widget_Base {
 
 								<?php $selected_template_id = $settings['tab_contents'][$index]['template_id']; ?>
 
-								<?php if (!$selected_template_id) {continue;} ?>
-
-								<div class="direct-tabs__content accordion-item bg-black-500 border-0">
-									<div id="collapse<?php echo $settings['tab_contents'][$index]['_id']; ?>" class="accordion-collapse collapse <?php echo $index == 0 ? 'show' : '' ; ?>" data-bs-parent="#accordionExampletop">
-										<div class="row align-items-center flex-xl-row-reverse">
+								<div id="section<?php echo $settings['tab_contents'][$index]['_id']; ?>" class="direct-tabs__content bg-black-500 border-0 tabcontent" <?php echo $index == 0 ? 'style="display:block"' : '' ; ?>>
+									<div class="row align-items-center flex-xl-row-reverse">
 										<?php
-											// Check if Elementor is active and the selected template ID is valid
-											if ( \Elementor\Plugin::instance()->editor->is_edit_mode() || \Elementor\Plugin::instance()->preview->is_preview_mode() || $selected_template_id ) {
-												// Use Elementor's frontend rendering method to display the template
-												echo \Elementor\Plugin::instance()->frontend->get_builder_content_for_display( $selected_template_id );
+											if ($selected_template_id) {
+												// Check if Elementor is active and the selected template ID is valid
+												if ( \Elementor\Plugin::instance()->editor->is_edit_mode() || \Elementor\Plugin::instance()->preview->is_preview_mode() || $selected_template_id ) {
+													// Use Elementor's frontend rendering method to display the template
+													echo \Elementor\Plugin::instance()->frontend->get_builder_content_for_display( $selected_template_id );
+												}
 											}
 										?>
-										</div>
 									</div>
 								</div>
 
