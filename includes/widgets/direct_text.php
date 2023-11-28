@@ -163,7 +163,7 @@ class Elementor_Direct_Text_Widget extends \Elementor\Widget_Base {
 				'label' => esc_html__( 'Dark Mode Color', 'elementor-widgets-direct' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
-					'[data-bs-theme="dark"] {{WRAPPER}} #direct-text' => 'color: {{VALUE}}',
+					'[data-bs-theme="dark"] {{WRAPPER}} #direct-text *' => 'color: {{VALUE}}',
 				],
 			]
 		);
@@ -174,7 +174,7 @@ class Elementor_Direct_Text_Widget extends \Elementor\Widget_Base {
 				'label' => esc_html__( 'Light Mode Color', 'elementor-widgets-direct' ),
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
-					'[data-bs-theme="light"] {{WRAPPER}} #direct-text' => 'color: {{VALUE}}',
+					'[data-bs-theme="light"] {{WRAPPER}} #direct-text *' => 'color: {{VALUE}}',
 				],
 			]
 		);

@@ -249,6 +249,8 @@ final class Plugin {
 		require_once( __DIR__ . '/widgets/features_table.php' );
 		require_once( __DIR__ . '/widgets/FAQ.php' );
 		require_once( __DIR__ . '/widgets/dwp_item.php' );
+		require_once( __DIR__ . '/widgets/woocommerce_shop.php' );
+				require_once( __DIR__ . '/widgets/direct_icon.php' );
 
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Hero_Widget() );
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Ticker_Widget() );
@@ -269,6 +271,8 @@ final class Plugin {
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Features_Table_Widget() );
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_FAQ_Widget() );
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Product_Item_Widget() );
+		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Wocommerce_Shop_Widget() );
+		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Direct_Icon_Widget() );
 
 	}
 

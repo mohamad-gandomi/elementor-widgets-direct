@@ -5,13 +5,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 /**
- * Elementor Product_Item Widget.
+ * Elementor Wocommerce_Shop Widget.
  *
- * Elementor widget that inserts Product_Item messages in a customize way with filters
+ * Elementor widget that inserts Wocommerce_Shop messages in a customize way with filters
  *
  * @since 1.0.0
  */
-class Elementor_Product_Item_Widget extends \Elementor\Widget_Base {
+class Elementor_Wocommerce_Shop_Widget extends \Elementor\Widget_Base {
 
 	public function __construct($data = [], $args = null) {
 		parent::__construct($data, $args);
@@ -20,7 +20,7 @@ class Elementor_Product_Item_Widget extends \Elementor\Widget_Base {
 	/**
 	 * Get widget styles.
 	 *
-	 * Retrieve Product_Item widget styles.
+	 * Retrieve Wocommerce_Shop widget styles.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -31,7 +31,7 @@ class Elementor_Product_Item_Widget extends \Elementor\Widget_Base {
 	/**
 	 * Get widget scripts.
 	 *
-	 * Retrieve Product_Item widget scripts.
+	 * Retrieve Wocommerce_Shop widget scripts.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -42,40 +42,40 @@ class Elementor_Product_Item_Widget extends \Elementor\Widget_Base {
 	/**
 	 * Get widget name.
 	 *
-	 * Retrieve Product_Item widget name.
+	 * Retrieve Wocommerce_Shop widget name.
 	 *
 	 * @since 1.0.0
 	 * @access public
 	 * @return string Widget name.
 	 */
 	public function get_name() {
-		return 'Product Item';
+		return 'Woocommerce Shop';
 	}
 
 	/**
 	 * Get widget title.
 	 *
-	 * Retrieve Product_Item widget title.
+	 * Retrieve Wocommerce_Shop widget title.
 	 *
 	 * @since 1.0.0
 	 * @access public
 	 * @return string Widget title.
 	 */
 	public function get_title() {
-		return esc_html__( 'Product Item', 'elementor-widgets-direct' );
+		return esc_html__( 'Woocommerce Shop', 'elementor-widgets-direct' );
 	}
 
 	/**
 	 * Get widget icon.
 	 *
-	 * Retrieve Product_Item widget icon.
+	 * Retrieve Wocommerce_Shop widget icon.
 	 *
 	 * @since 1.0.0
 	 * @access public
 	 * @return string Widget icon.
 	 */
 	public function get_icon() {
-		return 'eicon-product-add-to-cart';
+		return 'eicon-basket-medium';
 	}
 
 	/**
@@ -94,7 +94,7 @@ class Elementor_Product_Item_Widget extends \Elementor\Widget_Base {
 	/**
 	 * Get widget categories.
 	 *
-	 * Retrieve the Product_Item of categories the Product_Item widget belongs to.
+	 * Retrieve the Wocommerce_Shop of categories the Wocommerce_Shop widget belongs to.
 	 *
 	 * @since 1.0.0
 	 * @access public
@@ -107,18 +107,18 @@ class Elementor_Product_Item_Widget extends \Elementor\Widget_Base {
 	/**
 	 * Get widget keywords.
 	 *
-	 * Retrieve the Product_Item of keywords the Product_Item widget belongs to.
+	 * Retrieve the Wocommerce_Shop of keywords the Wocommerce_Shop widget belongs to.
 	 *
 	 * @since 1.0.0
 	 * @access public
 	 * @return array Widget keywords.
 	 */
 	public function get_keywords() {
-		return ['Product_Item'];
+		return ['Wocommerce_Shop'];
 	}
 
 	/**
-	 * Register Product_Item widget controls.
+	 * Register Wocommerce_Shop widget controls.
 	 *
 	 * Add input fields to allow the user to customize the widget settings.
 	 *
@@ -130,61 +130,23 @@ class Elementor_Product_Item_Widget extends \Elementor\Widget_Base {
 		$this->start_controls_section(
 			'content_section',
 			[
-				'label' => esc_html__( 'Product Item Content', 'elementor-widgets-direct' ),
+				'label' => esc_html__( 'Wocommerce Shop Content', 'elementor-widgets-direct' ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
 			]
 		);
 
         $this->add_control(
-			'image',
+			'posts_per_page',
 			[
-				'label' => esc_html__( 'Choose Image', 'elementor-widgets-direct' ),
-				'type' => \Elementor\Controls_Manager::MEDIA,
-			]
-		);
-
-        $this->add_control(
-			'title',
-			[
-				'label' => esc_html__( 'Title', 'elementor-widgets-direct' ),
-				'type' => \Elementor\Controls_Manager::TEXT,
-			]
-		);
-
-        $this->add_control(
-			'description',
-			[
-				'label' => esc_html__( 'Description', 'elementor-widgets-direct' ),
-				'type' => \Elementor\Controls_Manager::TEXTAREA,
-			]
-		);
-
-        $this->add_control(
-			'price',
-			[
-				'label' => esc_html__( 'Price', 'elementor-widgets-direct' ),
-				'type' => \Elementor\Controls_Manager::TEXT,
-			]
-		);
-
-        $this->add_control(
-			'link_title',
-			[
-				'label' => esc_html__( 'Link Title', 'elementor-widgets-direct' ),
-				'type' => \Elementor\Controls_Manager::TEXT,
-			]
-		);
-
-        $this->add_control(
-			'link',
-			[
-				'label' => esc_html__( 'Link', 'elementor-widgets-direct' ),
-				'type' => \Elementor\Controls_Manager::TEXT,
+				'label' => esc_html__( 'Posts Per Page', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::NUMBER,
+				'min' => 1,
+				'step' => 1,
+                'default' => 9,
 			]
 		);
 
 		$this->end_controls_section();
-
 
         /* Title Style Tab */
 		$this->start_controls_section(
@@ -333,36 +295,59 @@ class Elementor_Product_Item_Widget extends \Elementor\Widget_Base {
 
 		$settings = $this->get_settings_for_display();
 
-        ?>
-        <!-- WOOCOMMERCE PRODUCT CART
-        ================================================== -->
-        <div class="dwp-item p-7 rounded-5">
-            <div class="row">
-                <div class="col-12 col-md-6 mb-7 mb-xl-0">
-                    <div class="dwo-item__image rounded-5">
-                        <img class="w-100" src="<?php echo $settings['image']['url']; ?>" alt="<?php echo $settings['image']['alt']; ?>">
-                    </div>
-                </div>
-                <div class="col-12 col-md-6 d-flex flex-column justify-content-end">
-                    <div class="dwp-item__title">
-                        <h2 class="mb-4"><?php echo $settings['title']; ?></h2>
-                    </div>
-                    <div class="dwp-item__description">
-                        <p><?php echo $settings['description']; ?></p>
-                    </div>
-                    <div class="dwp-item__price mb-9">
-                        <span class="font-pinar"><?php echo $settings['price']; ?></span>
-                    </div>
-                    <div class="dwp-item__link">
-                        <a href="<?php echo $settings['link']; ?>" type="button" class="btn btn-primary w-100 text-white-500 p-3 fw-500 rounded-3"><?php echo $settings['link_title']; ?></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-		<div class="light bg-secondary position-absolute top-50 start-0 translate-middle dwp-item-light"></div>
-        <?php
+        // Get WooCommerce products
+        $args = array(
+            'post_type' => 'product',
+            'posts_per_page' => $settings['posts_per_page'], // Retrieve all products
+        );
+        $products = get_posts($args);
 
-		
+        if ($products) {
+            ?><div class='row'><?php
+            foreach ($products as $product) {
+
+                $title = get_the_title($product->ID);
+                $description = get_post_field('post_excerpt', $product->ID);
+                $price = get_post_meta($product->ID, '_regular_price', true);
+                $product_image_id = get_post_thumbnail_id($product->ID);
+                $product_image_url = wp_get_attachment_image_src($product_image_id, 'full');
+                $product_image_alt = get_post_meta($product_image_id, '_wp_attachment_image_alt', TRUE);
+                $product_url = get_permalink($product->ID);
+
+                // Output HTML for each product
+                ?>
+                <div class="col-12 col-xl-4">
+                    <div class="dwp-item p-7 rounded-5 mb-7">
+                        <div class="row">
+                            <div class="col-12 mb-7">
+                                <div class="dwo-item__image rounded-5">
+                                    <img class="w-100" src="<?php echo $product_image_url[0]; ?>" alt="<?php echo $product_image_alt; ?>">
+                                </div>
+                            </div>
+                            <div class="col-12 d-flex flex-column justify-content-end">
+                                <div class="dwp-item__title">
+                                    <h2 class="mb-4"><?php echo $title; ?></h2>
+                                </div>
+                                <div class="dwp-item__description">
+                                    <p><?php echo $description; ?></p>
+                                </div>
+                                <div class="dwp-item__price mb-9">
+                                    <span class="font-pinar"><?php echo number_format($price); ?> تومان</span>
+                                </div>
+                                <div class="dwp-item__link">
+                                    <a href="<?php echo $product_url; ?>" type="button" class="btn btn-primary w-100 text-white-500 p-3 fw-500 rounded-3">ثبت خرید</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php
+            }
+            wp_reset_postdata(); // Reset the global post data
+        } else {
+            echo 'No products found';
+        }
+        ?></div><?php
 
     }
 
