@@ -250,7 +250,9 @@ final class Plugin {
 		require_once( __DIR__ . '/widgets/FAQ.php' );
 		require_once( __DIR__ . '/widgets/dwp_item.php' );
 		require_once( __DIR__ . '/widgets/woocommerce_shop.php' );
-				require_once( __DIR__ . '/widgets/direct_icon.php' );
+		require_once( __DIR__ . '/widgets/direct_icon.php' );
+		require_once( __DIR__ . '/widgets/blog_post_item.php' );
+		require_once( __DIR__ . '/widgets/posts_loop.php' );
 
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Hero_Widget() );
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Ticker_Widget() );
@@ -273,6 +275,8 @@ final class Plugin {
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Product_Item_Widget() );
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Wocommerce_Shop_Widget() );
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Direct_Icon_Widget() );
+		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Blog_Post_Item_Widget() );
+		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Post_Loop_Widget() );
 
 	}
 

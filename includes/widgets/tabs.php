@@ -236,10 +236,11 @@ class Elementor_Tabs_Widget extends \Elementor\Widget_Base {
 								<div class="direct-tabs__btns tabs p-1 bg-gray-800 rounded-3 d-inline-block mb-12 mx-auto d-inline-flex flex-wrap">
 									<?php foreach ( $settings['tab_contents'] as $index => $item ) { ?>
 											<button
-												class="tablink fs-2 btn btn-gray-900 text-white-500 px-5 py-3 rounded-3 tab-button d-flex align-items-center <?php echo $index == 0 ? 'active' : '' ; ?>"
+												class="tablink fs-2 btn btn-gray-900 text-white-500 py-3 rounded-3 tab-button d-flex align-items-center <?php echo $index == 0 ? 'active' : '' ; ?>"
 												type="button"
 												data-section="section<?php echo $settings['tab_contents'][$index]['_id']; ?>"
 											>
+											<?php if( $settings['tab_contents'][$index]['tab_btn_icon'] ): ?>
 												<span class="<?php echo $settings['tab_contents'][$index]['tab_btn_icon']; ?> display-6 ms-5">
 													<span class="path1"></span>
 												    <span class="path2"></span>
@@ -251,7 +252,8 @@ class Elementor_Tabs_Widget extends \Elementor\Widget_Base {
 								                    <span class="path8"></span>
 								                    <span class="path9"></span>
 												</span>
-												<?php echo $settings['tab_contents'][$index]['tab_btn_name']; ?>
+											<?php endif; ?>
+											<?php echo $settings['tab_contents'][$index]['tab_btn_name']; ?>
 											</button>
 								
 								    <?php } ?>

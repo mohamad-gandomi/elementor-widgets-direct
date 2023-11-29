@@ -117,6 +117,28 @@ class Elementor_Blog_Widget extends \Elementor\Widget_Base {
 		return ['Blog'];
 	}
 
+	// Function to get categories as an associative array of name => ID
+    public function get_categories_list() {
+        $args = array(
+            'taxonomy'   => 'category', // Fetch categories
+            'hide_empty' => false, // Include categories with no posts
+        );
+
+        $categories = get_categories($args);
+
+        $options = array();
+
+        foreach ($categories as $category) {
+            $cat_id   = $category->term_id;
+            $cat_name = $category->name;
+
+            // Add category name and ID to the options array
+            $options[$cat_id] = $cat_name;
+        }
+
+        return $options;
+    }
+
 	/**
 	 * Register Blog widget controls.
 	 *
@@ -127,7 +149,74 @@ class Elementor_Blog_Widget extends \Elementor\Widget_Base {
 	 */
 	protected function register_controls() {
 
-		
+		$this->start_controls_section(
+			'content_section',
+			[
+				'label' => esc_html__( 'Post Loop Content', 'elementor-widgets-direct' ),
+				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+			]
+		);
+
+		$this->add_control(
+			'excerp_length',
+			[
+				'label' => esc_html__( 'Excerpt Length', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::NUMBER,
+                'default' => 100
+			]
+		);
+
+		$this->add_control(
+			'posts_per_page',
+			[
+				'label' => esc_html__( 'Posts Per Page', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::NUMBER,
+                'default' => 3
+			]
+		);
+
+		$this->add_control(
+			'design',
+			[
+				'label' => esc_html__( 'Design', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::SELECT,
+				'default' => 'main',
+				'options' => [
+					'main' => esc_html__( 'Main', 'elementor-widgets-direct' ),
+					'blog' => esc_html__( 'Blog', 'elementor-widgets-direct' ),
+				],
+				'frontend_available' => true,
+			]
+		);
+
+		$this->add_control(
+			'query',
+			[
+				'label' => esc_html__( 'Posts Query', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::SELECT,
+				'default' => 'last_posts',
+				'options' => [
+					'last_posts' => esc_html__( 'Last Posts', 'elementor-widgets-direct' ),
+					'category_id' => esc_html__( 'Category', 'elementor-widgets-direct' ),
+				],
+				'frontend_available' => true,
+			]
+		);
+
+		$this->add_control(
+			'category_id',
+			[
+				'label' => esc_html__( 'Select Category', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::SELECT2,
+                'condition' => [
+					'query' => ['category_id']
+				],
+				'label_block' => true,
+				'multiple' => false,
+				'options' => $this->get_categories_list(),
+			]
+		);
+
 	}
 
 	/**
@@ -145,20 +234,27 @@ class Elementor_Blog_Widget extends \Elementor\Widget_Base {
         ?>
         <!-- BLOG
         ================================================== -->
-        <section class="blog mb-14 mb-xl-16">
+        <section class="blog <?php echo 'blog' == $settings['design'] ? 'blog-archive' : '' ; ?>">
             <div class="container">
 
                 <!-- Blog Posts -->
                 <div class="blog row">
 
                 <?php
-                    // Define the custom query to retrieve posts
-                    $args = array(
-                        'post_type' => 'post',  // You can specify the post type here (e.g., 'post', 'page', 'custom_post_type')
-                        'posts_per_page' => 3, // To retrieve all posts, use -1, or specify the number of posts you want to display.
-                    );
 
-                    $custom_query = new \WP_Query($args);
+					$settings = $this->get_settings_for_display();
+					$args = array(
+						'post_type' => 'post', 
+						'posts_per_page' => $settings['posts_per_page'],
+						'orderby'        => 'date',
+						'order'          => 'DESC',
+					);
+
+					if ('category_id' == $settings['query']) {
+						$args['cat'] = $settings['category_id'];
+					}
+
+					$custom_query = new \WP_Query($args);
 
                     // Check if there are posts to display
                     if ($custom_query->have_posts()) :
@@ -196,26 +292,27 @@ class Elementor_Blog_Widget extends \Elementor\Widget_Base {
                                                 </span>
                                             </div>
                                             <div class="blog__card__image__info d-flex align-items-center">
-                                                <div class="blog__card__image__category p-3 text-secondary ms-3 d-flex align-items-center rounded-2">
-                                                    <span class="display-5 ms-3 icon-folder-open-line"></span>
+                                                <div class="blog__card__image__category p-3 text-secondary <?php echo 'blog' == $settings['design'] ? 'me-3' : 'ms-3' ; ?> d-flex align-items-center rounded-2">
+                                                    <span class="display-5 icon-folder-open-line ms-3"></span>
                                                     <span>
                                                         <?php
                                                         if (isset($post_categories) && !empty($post_categories)) {
                                                             foreach ($post_categories as $category) {
                                                                 echo $category->name;
+																break; 
                                                             }
                                                         }
                                                         ?>
                                                     </span>
                                                 </div>
-                                                <div class="blog__card__image__comments-no p-3 text-gray-50 ms-3 d-flex align-items-center rounded-2">
-                                                    <span class="display-5 ms-3 icon-message-text-line"></span>
+                                                <div class="blog__card__image__comments-no p-3 text-gray-50 <?php echo 'blog' == $settings['design'] ? 'me-3' : 'ms-3' ; ?> d-flex align-items-center rounded-2">
+                                                    <span class="display-5 icon-message-text-line ms-3"></span>
                                                     <span><?php echo $post_comments_count ?></span>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="blog__card__text p-6">
-                                            <h3 class="font-yekanbakh text-gray-50 display-5 fw-600 mb-2"><a class="text-decoration-none text-gray-50" href="<?php echo $psot_permalink; ?>"><?php echo $post_title; ?></a></h3>
+                                            <h3 class="font-yekanbakh text-gray-50 <?php echo 'blog' == $settings['design'] ? 'fs-2' : 'display-5' ; ?> fw-600 mb-2"><a class="text-decoration-none text-gray-50" href="<?php echo $psot_permalink; ?>"><?php echo $post_title; ?></a></h3>
                                             <p class="text-gray-200 fs-4 mb-6"><?php echo $excerpt_result; ?></p>
                                             <div class="d-flex align-items-center justify-content-between">
                                                 <div>
