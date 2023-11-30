@@ -1,0 +1,23 @@
+.newsletter-text-container {
+    min-height: 324px;
+}
+
+.newsletter-caption {
+    width: 469px;
+}
+
+@media only screen and (max-width:1024px) {
+    .newsletter-img {
+        width: 160px;
+    }
+
+    .newsletter-caption,
+    .caption-container {
+        position: relative !important;
+    }
+
+    .newsletter-caption {
+        width: auto;
+    }
+
+}

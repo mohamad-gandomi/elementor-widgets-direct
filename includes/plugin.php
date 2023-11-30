@@ -253,6 +253,8 @@ final class Plugin {
 		require_once( __DIR__ . '/widgets/direct_icon.php' );
 		require_once( __DIR__ . '/widgets/blog_post_item.php' );
 		require_once( __DIR__ . '/widgets/posts_loop.php' );
+		require_once( __DIR__ . '/widgets/article_blog_tab.php' );
+		require_once( __DIR__ . '/widgets/newsletter.php' );
 
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Hero_Widget() );
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Ticker_Widget() );
@@ -277,6 +279,8 @@ final class Plugin {
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Direct_Icon_Widget() );
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Blog_Post_Item_Widget() );
 		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Post_Loop_Widget() );
+		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Article_Blog_Tab_Widget() );
+		$widgets_manager->register( new \Elementor_Widgets_Direct\Widgets\Elementor_Newsletter_Widget() );
 
 	}
 
