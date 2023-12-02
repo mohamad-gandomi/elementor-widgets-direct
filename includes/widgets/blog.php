@@ -15,6 +15,7 @@ class Elementor_Blog_Widget extends \Elementor\Widget_Base {
 
 	public function __construct($data = [], $args = null) {
 		parent::__construct($data, $args);
+		wp_register_style( 'blog', EAA_PDU . 'includes/assets/css/widgets/blog.css', [], '1.0.0' );
 	}
 
 	/**
@@ -26,7 +27,9 @@ class Elementor_Blog_Widget extends \Elementor\Widget_Base {
 	 * @access public
 	 * @return string Widget styles.
 	 */
-	//public function get_style_depends() {}
+	public function get_style_depends() {
+		return ['blog'];
+	}
 
 	/**
 	 * Get widget scripts.
@@ -277,14 +280,13 @@ class Elementor_Blog_Widget extends \Elementor\Widget_Base {
                                 <!-- Blog Post -->
                                 <div class="col-12 mb-6 mb-xxl-0 col-xl-6 col-xxl-4">
                                     <div class="blog__card rounded-6 bg-gray-800">
-                                        <div class="blog__card__image">
-                                            <img class="w-100" src="<?php echo $post_thumbnail; ?>" alt="<?php echo $post_title; ?>">
+                                        <div class="blog__card__image" style="background-image: url(<?php echo $post_thumbnail; ?>)">
                                             <div class="blog__card__image__icons">
-                                                <span class="icon-heart-bulk text-black-200 display-4 ms-3">
+                                                <span class="icon-heart-bulk text-black-200 display-5 ms-3">
                                                     <span class="path1"></span>
                                                     <span class="path2"></span>
                                                 </span>
-                                                <span class="icon-archive-bulk text-black-200 display-4">
+                                                <span class="icon-archive-bulk text-black-200 display-5">
                                                     <span class="path1"></span>
                                                     <span class="path2"></span>
                                                     <span class="path3"></span>
@@ -292,9 +294,9 @@ class Elementor_Blog_Widget extends \Elementor\Widget_Base {
                                                 </span>
                                             </div>
                                             <div class="blog__card__image__info d-flex align-items-center">
-                                                <div class="blog__card__image__category p-3 text-secondary <?php echo 'blog' == $settings['design'] ? 'me-3' : 'ms-3' ; ?> d-flex align-items-center rounded-2">
+                                                <div class="blog__card__image__category p-3 text-secondary me-3 d-flex align-items-center rounded-2">
                                                     <span class="display-5 icon-folder-open-line ms-3"></span>
-                                                    <span>
+                                                    <span class="fs-4">
                                                         <?php
                                                         if (isset($post_categories) && !empty($post_categories)) {
                                                             foreach ($post_categories as $category) {
@@ -305,22 +307,22 @@ class Elementor_Blog_Widget extends \Elementor\Widget_Base {
                                                         ?>
                                                     </span>
                                                 </div>
-                                                <div class="blog__card__image__comments-no p-3 text-gray-50 <?php echo 'blog' == $settings['design'] ? 'me-3' : 'ms-3' ; ?> d-flex align-items-center rounded-2">
-                                                    <span class="display-5 icon-message-text-line ms-3"></span>
-                                                    <span><?php echo $post_comments_count ?></span>
+                                                <div class="blog__card__image__comments-no p-3 text-gray-50 me-3 d-flex align-items-center rounded-2">
+                                                    <span class="display-5 icon-message-text-line ms-1"></span>
+                                                    <span class="fs-4"><?php echo $post_comments_count ?></span>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="blog__card__text p-6">
-                                            <h3 class="font-yekanbakh text-gray-50 <?php echo 'blog' == $settings['design'] ? 'fs-2' : 'display-5' ; ?> fw-600 mb-2"><a class="text-decoration-none text-gray-50" href="<?php echo $psot_permalink; ?>"><?php echo $post_title; ?></a></h3>
+                                            <h3 class="font-yekanbakh text-gray-50 fs-2 fw-600 mb-2"><a class="text-decoration-none text-gray-50" href="<?php echo $psot_permalink; ?>"><?php echo $post_title; ?></a></h3>
                                             <p class="text-gray-200 fs-4 mb-6"><?php echo $excerpt_result; ?></p>
                                             <div class="d-flex align-items-center justify-content-between">
                                                 <div>
-                                                    <img class="ms-3 rounded-circle" src="<?php echo $post_author_avatar_url; ?>" alt="<?php echo $post_author; ?> profile image">
-                                                    <span class="text-white-500"><?php echo $post_author; ?></span>
+                                                    <img class="ms-1 rounded-circle" src="<?php echo $post_author_avatar_url; ?>" alt="<?php echo $post_author; ?> profile image">
+                                                    <span class="text-white-500 fs-4"><?php echo $post_author; ?></span>
                                                 </div>
                                                 <div class="blog__card__text__date d-flex align-items-center">
-                                                    <span class="icon-calendar-bulk text-gray-500 display-4 ms-3">
+                                                    <span class="icon-calendar-bulk text-gray-500 display-4 ms-1">
                                                         <span class="path1"></span>
                                                         <span class="path2"></span>
                                                         <span class="path3"></span>
@@ -330,7 +332,7 @@ class Elementor_Blog_Widget extends \Elementor\Widget_Base {
                                                         <span class="path7"></span>
                                                         <span class="path8"></span>
                                                     </span>
-                                                    <span class="text-gray-500"><?php echo $post_date; ?></span>
+                                                    <span class="text-gray-500 fs-4"><?php echo $post_date; ?></span>
                                                 </div>
                                             </div>
                                         </div>

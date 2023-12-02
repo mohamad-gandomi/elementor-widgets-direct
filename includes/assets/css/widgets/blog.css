@@ -1,0 +1,11 @@
+.blog__card__image {
+    min-height: 419px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+.blog__card__image__info {
+    right: auto;
+    left: 24px;
+}
