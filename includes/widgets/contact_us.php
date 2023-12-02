@@ -194,16 +194,20 @@ class Elementor_Contact_Us_Widget extends \Elementor\Widget_Base {
 
                             <div class="col-12 col-xl-6 main-contact-us__image text-center text-xl-start">
                                 <img src="<?php echo $settings['first_image']['url']; ?>" alt="<?php echo $settings['first_image']['alt']; ?>" >
+								<?php if($settings['first_message']): ?>
                                 <div class="bg-gray-800 text-gray-100 d-inline-block main-contact-us__image__text main-contact-us__image__text--female text-end">
                                     <p class="m-0"><?php echo $settings['first_message']; ?></p>
                                 </div>
+								<?php endif; ?>
                             </div>
 
                             <div class="col-12 col-xl-6 main-contact-us__image mt-8 mt-xl-12 text-center text-xl-end">
                                 <img src="<?php echo $settings['second_image']['url']; ?>" alt="<?php echo $settings['second_image']['alt']; ?>" >
+								<?php if($settings['second_message']): ?>
                                 <div class="bg-gray-800 text-gray-100 d-inline-block main-contact-us__image__text main-contact-us__image__text--male">
                                     <p class="m-0"><?php echo $settings['second_message']; ?></p>
                                 </div>
+								<?php endif; ?>
                             </div>
 
                         </div>
