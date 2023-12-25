@@ -199,6 +199,18 @@ class Elementor_Video_Widget extends \Elementor\Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'auto_play',
+			[
+				'label' => esc_html__( 'Auto Play', 'textdomain' ),
+				'type' => \Elementor\Controls_Manager::SWITCHER,
+				'label_on' => esc_html__( 'Yes', 'textdomain' ),
+				'label_off' => esc_html__( 'No', 'textdomain' ),
+				'return_value' => 'yes',
+				'default' => 'no',
+			]
+		);
+
 		$this->end_controls_section();
 
 
@@ -390,7 +402,7 @@ class Elementor_Video_Widget extends \Elementor\Widget_Base {
 						<?php if('hosted' == $settings['video_type']): ?>
 
 						    <div class="video-container rounded-5 bg-gray-800 mt-5">
-								<video class="w-100 rounded-5 direct_video" autoplay="" loop="" muted="muted" playsinline="" controlslist="nodownload" style="object-fit: cover;">
+								<video class="w-100 rounded-5 direct_video" <?php echo $settings['auto_play'] ? 'autoplay=""' : 'controls' ?> muted="muted" playsinline="" controlslist="nodownload" style="object-fit: cover;">
 									<source src="<?php echo esc_url($settings['video']['url']); ?>" type="video/mp4">
 									Your browser does not support the video tag.
 								</video>

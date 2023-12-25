@@ -373,7 +373,7 @@ class Elementor_Product_Form_Widget extends \Elementor\Widget_Base {
                         </div>
 
 						<!-- Product Form -->
-						<form id="product_add_to_cart_form" action="<?php echo esc_url(wc_get_cart_url()); ?>" class="product__info__form align-items-center mb-7" method="post">
+						<form id="product_add_to_cart_form" action="<?php echo esc_url(wc_get_checkout_url()); ?>" class="product__info__form align-items-center mb-7" method="post">
 
 							<!-- Product Price -->
 							<div class="product__info__form__price mb-7">
@@ -422,10 +422,14 @@ class Elementor_Product_Form_Widget extends \Elementor\Widget_Base {
 			// JavaScript/jQuery for quantity adjustment and form submission
 			jQuery(document).ready(function ($) {
 				$('#product_add_to_cart_form').on('submit', function (e) {
+					e.preventDefault(); // Prevent default form submission
+					
 					var quantity = $('#quantity').val();
 					var form = $(this);
-					var url = '<?php echo esc_url(wc_get_cart_url()); ?>?add-to-cart=<?php echo $product_id; ?>&quantity=' + quantity;
-					form.attr('action', url);
+					var url = '<?php echo esc_url(wc_get_checkout_url()); ?>?add-to-cart=<?php echo $product_id; ?>&quantity=' + quantity;
+					
+					// Redirect to checkout page with the updated URL
+					window.location.href = url;
 				});
 			});
 		</script>
