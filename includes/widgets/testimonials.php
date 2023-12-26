@@ -122,6 +122,20 @@ class Elementor_Testimonials_Widget extends \Elementor\Widget_Base {
 	}
 
 	/**
+	 * Truncates a string to a specified length and adds ellipsis if needed.
+	 *
+	 * @param string $text The text to truncate.
+	 * @param int $length The maximum length of the truncated text.
+	 * @return string The truncated text.
+	 */
+	public function truncateText($text, $length) {
+		if (mb_strlen($text) > $length) {
+			$text = mb_substr($text, 0, $length, 'utf-8') . '...';
+		}
+		return $text;
+	}
+
+	/**
 	 * Register Testimonials widget controls.
 	 *
 	 * Add input fields to allow the user to customize the widget settings.
@@ -356,7 +370,7 @@ class Elementor_Testimonials_Widget extends \Elementor\Widget_Base {
 								</div>
 								<span class="quote-mark text-gray-600">”</span>
 							</div>
-							<p class="customer-testimonials-carousel__card__message mb-0"><?php echo $settings['testimonial_items'][$index]['message']; ?></p>
+							<p class="customer-testimonials-carousel__card__message mb-0"><?php echo $this->truncateText($settings['testimonial_items'][$index]['message'], 130); ?></p>
 						</div>
 					</div>
 				<?php } ?>

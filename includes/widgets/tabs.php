@@ -233,7 +233,7 @@ class Elementor_Tabs_Widget extends \Elementor\Widget_Base {
 
 							<!-- Features Tabs Btns -->
 							<div class="d-flex mx-auto">
-								<div class="direct-tabs__btns tabs p-1 bg-gray-800 rounded-3 d-inline-block mb-12 mx-auto d-inline-flex flex-wrap">
+								<div class="direct-tabs__btns tabs p-1 bg-gray-800 rounded-3 d-inline-block mb-12 d-inline-flex flex-wrap">
 									<?php foreach ( $settings['tab_contents'] as $index => $item ) { ?>
 											<button
 												class="tablink fs-2 btn btn-gray-900 text-white-500 py-3 rounded-3 tab-button d-flex align-items-center <?php echo $index == 0 ? 'active' : '' ; ?>"

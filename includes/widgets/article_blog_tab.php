@@ -181,11 +181,27 @@ class Elementor_Article_Blog_Tab_Widget extends \Elementor\Widget_Base {
                 <div class="col-12 col-xl-8 ps-xl-1">
                     <div class="posts-container">
                         <?php
+
+                        // Check if the user is logged in
+                        if (is_user_logged_in()) {
+                            // Get the current user ID
+                            $user_id = get_current_user_id();
+
+                            // Get the liked posts for the current user
+                            $liked_posts = get_user_meta($user_id, 'liked_posts', true);
+                        } else {
+                            // If the user is not logged in, check if a cookie exists for liked posts
+                            $liked_posts = isset($_COOKIE['liked_posts']) ? json_decode(stripslashes($_COOKIE['liked_posts']), true) : array();
+                        }
+
+
                         // Check if there are posts to display
                         if ($custom_query->have_posts()) :
                             while ($custom_query->have_posts()) : $custom_query->the_post();
 
                                 $post_title = get_the_title();
+                                $post_id = get_the_ID();
+							    $liked_class = (in_array($post_id, $liked_posts)) ? 'text-danger-500' : 'text-black-200';
                                 $post_excerpt = get_the_excerpt();
                                 $excerpt = substr($post_excerpt, 0, 200);
                                 $excerpt_result = substr($excerpt, 0, strrpos($excerpt, ' '));
@@ -197,22 +213,23 @@ class Elementor_Article_Blog_Tab_Widget extends \Elementor\Widget_Base {
                                 $post_author_id = get_the_author_meta('ID');
                                 $post_author_avatar_url = get_avatar_url($post_author_id, array('size' => 32));
                                 $psot_permalink = get_post_permalink();
+                                
                                 ?>
-                                <article class="bta-cart bg-gray-800 rounded-6 overflow-hidden mb-6">
+                                <article class="bta-cart bg-gray-800 rounded-6 overflow-hidden mb-6 post-wrapper">
                                     <div class="row">
 
                                         <div class="bta-cart__image col-12 col-md-4 position-relative top-0 start-0" style="background-image: url('<?php echo $post_thumbnail; ?>');">
                                             <div class="bta-cart__image__top">
-                                                <span class="icon-heart-bulk text-black-200 display-4 ms-3">
+                                                <span class="icon-heart-bulk <?php echo $liked_class; ?> display-5 ms-3 post-like" data-post-id="<?php echo get_the_ID(); ?>" type="button">
                                                     <span class="path1"></span>
                                                     <span class="path2"></span>
                                                 </span>
-                                                <span class="icon-saved-bulk text-black-200 display-4">
+                                                <!-- <span class="icon-saved-bulk text-black-200 display-4">
                                                     <span class="path1"></span>
                                                     <span class="path2"></span>
                                                     <span class="path3"></span>
                                                     <span class="path4"></span>
-                                                </span>
+                                                </span> -->
                                             </div>
                                             <div class="d-flex align-items-center bta-cart__image__bottom">
                                                 <div class="p-3 text-secondary me-3 d-flex align-items-center rounded-2 bta-cart__image__bottom__category">

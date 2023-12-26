@@ -245,6 +245,18 @@ class Elementor_Blog_Widget extends \Elementor\Widget_Base {
 
                 <?php
 
+					// Check if the user is logged in
+					if (is_user_logged_in()) {
+						// Get the current user ID
+						$user_id = get_current_user_id();
+
+						// Get the liked posts for the current user
+						$liked_posts = get_user_meta($user_id, 'liked_posts', true);
+					} else {
+						// If the user is not logged in, check if a cookie exists for liked posts
+						$liked_posts = isset($_COOKIE['liked_posts']) ? json_decode(stripslashes($_COOKIE['liked_posts']), true) : array();
+					}
+
 					$settings = $this->get_settings_for_display();
 					$args = array(
 						'post_type' => 'post', 
@@ -263,6 +275,8 @@ class Elementor_Blog_Widget extends \Elementor\Widget_Base {
                     if ($custom_query->have_posts()) :
                         while ($custom_query->have_posts()) : $custom_query->the_post();
 
+						    $post_id = get_the_ID();
+							$liked_class = (in_array($post_id, $liked_posts)) ? 'text-danger-500' : 'text-black-200';
                             $post_title = get_the_title();
                             $post_excerpt = get_the_excerpt();
                             $excerpt = substr($post_excerpt, 0, 200);
@@ -282,16 +296,16 @@ class Elementor_Blog_Widget extends \Elementor\Widget_Base {
                                     <div class="blog__card rounded-6 bg-gray-800">
                                         <div class="blog__card__image" style="background-image: url(<?php echo $post_thumbnail; ?>)">
                                             <div class="blog__card__image__icons">
-                                                <span class="icon-heart-bulk text-black-200 display-5 ms-3">
+                                                <span class="icon-heart-bulk <?php echo $liked_class; ?> display-5 ms-3 post-like" data-post-id="<?php echo get_the_ID(); ?>" type="button">
                                                     <span class="path1"></span>
                                                     <span class="path2"></span>
                                                 </span>
-                                                <span class="icon-archive-bulk text-black-200 display-5">
+                                                <!-- <span class="icon-archive-bulk text-black-200 display-5">
                                                     <span class="path1"></span>
                                                     <span class="path2"></span>
                                                     <span class="path3"></span>
                                                     <span class="path4"></span>
-                                                </span>
+                                                </span> -->
                                             </div>
                                             <div class="blog__card__image__info d-flex align-items-center">
                                                 <div class="blog__card__image__category p-3 text-secondary me-3 d-flex align-items-center rounded-2">

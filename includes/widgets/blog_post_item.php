@@ -195,8 +195,20 @@ class Elementor_Blog_Post_Item_Widget extends \Elementor\Widget_Base {
 
 		$settings = $this->get_settings_for_display();
 
-        $post_id = $settings['post_id'];
+		// Check if the user is logged in
+		if (is_user_logged_in()) {
+			// Get the current user ID
+			$user_id = get_current_user_id();
 
+			// Get the liked posts for the current user
+			$liked_posts = get_user_meta($user_id, 'liked_posts', true);
+		} else {
+			// If the user is not logged in, check if a cookie exists for liked posts
+			$liked_posts = isset($_COOKIE['liked_posts']) ? json_decode(stripslashes($_COOKIE['liked_posts']), true) : array();
+		}
+
+        $post_id = $settings['post_id'];
+		$liked_class = (in_array($post_id, $liked_posts)) ? 'text-danger-500' : 'text-black-200';
         $post_title = get_the_title( $post_id );
         $post_excerpt = get_the_excerpt( $post_id );
         $excerpt = substr($post_excerpt, 0, $settings['excerpt_length']);
@@ -210,6 +222,9 @@ class Elementor_Blog_Post_Item_Widget extends \Elementor\Widget_Base {
         $post_author_id = get_post_field('post_author', $post_id);
         $post_author_avatar_url = get_avatar_url($post_author_id, array('size' => 32));
 
+
+
+
         ?>
         <div class="blog blog-archive">
             <!-- Blog Post -->
@@ -217,16 +232,16 @@ class Elementor_Blog_Post_Item_Widget extends \Elementor\Widget_Base {
                 <div class="blog__card__image">
                     <img class="w-100" src="<?php echo $post_thumbnail; ?>" alt="<?php echo $post_title; ?>">
                     <div class="blog__card__image__icons">
-                        <span class="icon-heart-bulk text-black-200 display-4 ms-3">
-                            <span class="path1"></span>
-                            <span class="path2"></span>
-                        </span>
-                        <span class="icon-saved-bulk text-black-200 display-4">
+						<span class="icon-heart-bulk <?php echo $liked_class; ?> display-5 ms-3 post-like" data-post-id="<?php echo get_the_ID(); ?>" type="button">
+							<span class="path1"></span>
+							<span class="path2"></span>
+						</span>
+                        <!-- <span class="icon-saved-bulk text-black-200 display-4">
                             <span class="path1"></span>
                             <span class="path2"></span>
                             <span class="path3"></span>
                             <span class="path4"></span>
-                        </span>
+                        </span> -->
                     </div>
                     <div class="blog__card__image__info d-flex align-items-center">
                         <div class="blog__card__image__category p-3 text-secondary ms-3 d-flex align-items-center rounded-2">
