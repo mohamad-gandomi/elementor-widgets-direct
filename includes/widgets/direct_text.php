@@ -164,6 +164,7 @@ class Elementor_Direct_Text_Widget extends \Elementor\Widget_Base {
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'selectors' => [
 					'[data-bs-theme="dark"] {{WRAPPER}} #direct-text *' => 'color: {{VALUE}}',
+					'[data-bs-theme="dark"] {{WRAPPER}} #direct-text' => 'color: {{VALUE}}',
 				],
 			]
 		);

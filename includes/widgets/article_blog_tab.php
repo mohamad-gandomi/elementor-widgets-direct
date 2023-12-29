@@ -176,9 +176,9 @@ class Elementor_Article_Blog_Tab_Widget extends \Elementor\Widget_Base {
                     ?>
                 </div>
             </div>
-            <div class="row mb-6">
+            <div class="article_blog_tab row flex-row-reverse flex-xl-row mb-6">
 
-                <div class="col-12 col-xl-8 ps-xl-1">
+                <div class="blog col-12 col-xl-8 ps-xl-1">
                     <div class="posts-container">
                         <?php
 

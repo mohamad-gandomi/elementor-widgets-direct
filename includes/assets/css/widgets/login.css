@@ -1,0 +1,20 @@
+.Login-button {
+    padding: 16px 32px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    max-width: 246px;
+}
+
+
+html[data-bs-theme="dark"] .Login-item {
+    background-color: #292D35 !important;
+}
+
+html[data-bs-theme="dark"] .Login-item .icon-info-bulk {
+    color: #C2C6CE !important;
+}
+
+html[data-bs-theme="light"] .Login-light {
+    background-color: #FFBE15 !important;
+}
