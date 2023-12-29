@@ -226,7 +226,7 @@ class Elementor_Blog_Post_Item_Widget extends \Elementor\Widget_Base {
 
 
         ?>
-        <div class="blog blog-archive">
+        <div class="blog blog-archive" <?php echo !is_admin() ? 'data-aos-once="true" data-aos-delay="50" data-aos="fade-up"' : '' ; ?>>
             <!-- Blog Post -->
             <div class="blog__card rounded-6 bg-gray-800">
                 <div class="blog__card__image">

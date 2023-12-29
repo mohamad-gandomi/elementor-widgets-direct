@@ -255,10 +255,10 @@ class Elementor_Post_Loop_Widget extends \Elementor\Widget_Base {
             ?>
 
             <!-- Blog Post New -->
-            <article class="post-item bg-gray-800 rounded-6 mb-6">
+            <article class="post-item bg-gray-800 rounded-6 mb-6" <?php echo !is_admin() ? 'data-aos-once="true" data-aos-delay="50" data-aos="fade-up"' : '' ; ?>>
                 <div class="image-container" style="background-image:url('<?php echo $post_thumbnail; ?>');"><a href="<?php echo $psot_permalink; ?>"></a></div>
                 <div class="post-content py-4 px-6">
-                    <h3 class="fs-3 fw-600 mb-3"><a class="text-decoration-none text-gray-50" href="<?php echo $psot_permalink; ?>"><?php echo $post_title; ?></a></h3>
+                    <h3 class="font-yekanbakh fs-3 fw-600 mb-3"><a class="text-decoration-none text-gray-50" href="<?php echo $psot_permalink; ?>"><?php echo $post_title; ?></a></h3>
                     <p class="text-gray-200 mb-3 fs-4"><?php echo $excerpt_result; ?></p>
                     <div class="post-tags">
                         <?php if ($post_tags): ?>

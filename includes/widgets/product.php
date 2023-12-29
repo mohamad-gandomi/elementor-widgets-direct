@@ -365,7 +365,7 @@ class Elementor_Product_Widget extends \Elementor\Widget_Base {
         ?>
         <!-- PRODUCTS
         ================================================== -->
-        <section class="direct-products">
+        <section class="direct-products" <?php echo !is_admin() ? 'data-aos-once="true" data-aos-delay="50" data-aos="fade-up"' : '' ; ?>>
             <div class="container">
                 <!-- Products Cards -->
                 <div class="row">
@@ -376,7 +376,7 @@ class Elementor_Product_Widget extends \Elementor\Widget_Base {
                             <img class="p-2" src="<?php echo $settings['product_image']['url']; ?>" alt="<?php echo $settings['product_image']['alt']; ?>" >
                         </div>
                         <div>
-                            <h3 class="mb-4"><?php echo $settings['product_title']; ?></h3>
+                            <h3 class="mb-4 fw-700"><?php echo $settings['product_title']; ?></h3>
                             <p class="mb-7"><?php echo $settings['product_description']; ?></p>
                             <ul class="mb-7">
 								<?php

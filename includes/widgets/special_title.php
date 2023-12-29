@@ -312,7 +312,7 @@ class Elementor_Special_Title_Widget extends \Elementor\Widget_Base {
         ?>
         <!-- Title
         ================================================== -->
-        <section>
+        <section <?php echo !is_admin() ? 'data-aos-once="true" data-aos-delay="50" data-aos="fade-up"' : '' ; ?>>
             <div class="container">
                 <!-- Section Ttile -->
                 <div class="row sectoin-title">

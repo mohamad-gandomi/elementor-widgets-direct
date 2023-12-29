@@ -306,9 +306,12 @@ class Elementor_Hero_Widget extends \Elementor\Widget_Base {
                                         <img src="<?php echo esc_url($hero_avatar_images['url']); ?>" alt="<?php echo esc_attr($hero_avatar_images['alt']); ?>" />
                                     <?php endif; ?>
                                 </div>
-                                <div class="col-12 col-xl-6 align-self-center position-relative">
+                                <div class="col-12 col-xl-6 align-self-center position-relative d-flex justify-content-center">
 
-                                    <a href="<?php echo $settings["hero_link"]['url']; ?>" class="text-secondary text-decoration-none"><?php echo $settings["hero_link_title"]; ?></a>
+                                    <a href="<?php echo $settings["hero_link"]['url']; ?>" class="btn text-secondary text-decoration-none d-flex align-items-center hover-link w-auto">
+										<span class="text"><?php echo $settings["hero_link_title"]; ?></span>
+										<span class="icon-arrow-left-line icon"></span>
+									</a>
 
                                     <?php $hero_arrow_light = $settings['hero_arrow_light']; ?>
                                     <?php if( !empty( $hero_arrow_light ) ): ?>

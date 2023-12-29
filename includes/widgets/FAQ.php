@@ -197,7 +197,7 @@ class Elementor_FAQ_Widget extends \Elementor\Widget_Base {
                                     <div class="accordion-item bg-black-500 mb-9">
                                         <h2 class="accordion-header border-0" id="flush-headingOne-header">
                                             <button 
-                                                class="accordion-button collapsed bg-black-500 text-gray-50 fs-2 fw-bold shadow-none pb-8 pt-0 px-0 text-end" 
+                                                class="accordion-button collapsed bg-black-500 text-gray-50 fs-2 fw-700 shadow-none pb-8 pt-0 px-0 text-end" 
                                                 type="button" 
                                                 data-bs-toggle="collapse" 
                                                 data-bs-target="#flush-collapse<?php echo $settings['faq_items'][$index]['_id']; ?>" 

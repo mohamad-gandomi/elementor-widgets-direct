@@ -165,7 +165,7 @@ class Elementor_Article_Blog_Tab_Widget extends \Elementor\Widget_Base {
         $custom_query = new \WP_Query($args);
 
         ?>
-        <div class="container">
+        <div class="container" <?php echo !is_admin() ? 'data-aos-once="true" data-aos-delay="50" data-aos="fade-up"' : '' ; ?>>
             <div class="row mb-9 bta-buttons">
                 <div class="col-12">
                     <button class="category-btn btn btn-primary-800 text-primary-400 fs-4 rounded-3 py-2 ms-1 mb-2" href="related-link1">همه مقالات</button>
@@ -255,7 +255,7 @@ class Elementor_Article_Blog_Tab_Widget extends \Elementor\Widget_Base {
                                         <div class="col-12 col-md-8">
 
                                             <div class="py-7 px-2 px-xl-6">
-                                                <h3 class="display-4 text-gray-50 fw-700 mb-3"><?php echo $post_title; ?></h3>
+                                                <h3 class="font-yekanbakh display-5 text-gray-50 fw-700 mb-3"><?php echo $post_title; ?></h3>
                                                 <p class="fs-4 text-gray-200"><?php echo $post_excerpt; ?></p>
                                                 <div class="d-flex align-items-center">
                                                     <div class="ms-2 ms-xl-8 bta-cart__author">

@@ -15,6 +15,9 @@ class Elementor_Product_Form_Widget extends \Elementor\Widget_Base {
 
 	public function __construct($data = [], $args = null) {
 		parent::__construct($data, $args);
+		wp_register_script( 'swiper-bundle', EAA_PDU . 'includes/assets/js/widgets/swiper-bundle.min.js', [], '1.0.0', true );
+        wp_register_script( 'product-form', EAA_PDU . 'includes/assets/js/widgets/product-form.js', ['elementor-frontend'], '1.0.0', true );
+		wp_register_style( 'product-form', EAA_PDU . 'includes/assets/css/widgets/product-form.css', [], '1.0.0' );
 	}
 
 	/**
@@ -26,7 +29,9 @@ class Elementor_Product_Form_Widget extends \Elementor\Widget_Base {
 	 * @access public
 	 * @return string Widget styles.
 	 */
-	//public function get_style_depends() {}
+	public function get_style_depends() {
+		return [ 'product-form'];
+	}
 
 	/**
 	 * Get widget scripts.
@@ -37,7 +42,9 @@ class Elementor_Product_Form_Widget extends \Elementor\Widget_Base {
 	 * @access public
 	 * @return string Widget scripts.
 	 */
-	//public function get_script_depends() {}
+	public function get_script_depends() {
+		return [ 'product-form', 'swiper-bundle' ];
+	}
 
 	/**
 	 * Get widget name.
@@ -49,7 +56,7 @@ class Elementor_Product_Form_Widget extends \Elementor\Widget_Base {
 	 * @return string Widget name.
 	 */
 	public function get_name() {
-		return 'Product Form';
+		return 'Product_Form';
 	}
 
 	/**
@@ -193,6 +200,16 @@ class Elementor_Product_Form_Widget extends \Elementor\Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'gallery',
+			[
+				'label' => esc_html__( 'Choice Images', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::GALLERY,
+				'show_label' => false,
+				'default' => [],
+			]
+		);
+
         $this->add_control(
 			'product_icon',
 			[
@@ -316,8 +333,24 @@ class Elementor_Product_Form_Widget extends \Elementor\Widget_Base {
                         <div class="product__gallery my-10">
                             <!-- Product Image -->
                             <div class="product__gallery__image d-inline-block">
-                                <img class="w-100" src="<?php echo esc_url($settings['product_image']['url']); ?>" alt="<?php echo esc_url($settings['product_image']['alt']); ?>" >
-                                <div class="product__gallery__image__blur product_background_color"></div>
+								<?php if(!$settings['gallery']) {
+									?>
+                                	<img class="w-100" src="<?php echo esc_url($settings['product_image']['url']); ?>" alt="<?php echo esc_url($settings['product_image']['alt']); ?>" >
+									<?php
+								} else {
+									?>
+									<!-- Swiper -->
+									<div class="slideshow-container">
+											<?php
+											foreach ( $settings['gallery'] as $image ) {
+												echo '<div class="mySlides"><img class="" src="' . esc_attr( $image['url'] ) . '"></div>';
+											}
+											?>
+									</div>
+									<?php
+								}
+								?>
+								<div class="product__gallery__image__blur product_background_color"></div>
                                 <span class="icon-box-2-bulk display-1 position-absolute bottom-0 end-0 product_color">
                                     <span class="path1"></span>
                                     <span class="path2"></span>

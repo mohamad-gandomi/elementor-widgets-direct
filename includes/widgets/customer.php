@@ -572,7 +572,7 @@ class Elementor_Customer_Widget extends \Elementor\Widget_Base {
         ?>
         <!-- CUSTOMERS
         ================================================== -->
-        <section class="customers">
+        <section class="customers" <?php echo !is_admin() ? 'data-aos-once="true" data-aos-delay="50" data-aos="fade-up"' : '' ; ?>>
             <div class="container">
 
                 <div class="row">

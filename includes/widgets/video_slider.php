@@ -227,13 +227,13 @@ class Elementor_Video_Slider_Widget extends \Elementor\Widget_Base {
                     foreach ( $settings['video_items'] as $index => $item ) {
                         ?>
                         <!-- Slide -->
-                        <div class="swiper-slide w-auto">
+                        <div class="swiper-slide w-auto rounded-5">
                             <img 
-                                role="button" 
-                                class="" 
+                                role="button"
+                                class=""
                                 src="<?php echo $settings['video_items'][$index]['video_poster']['url']; ?>"
                                 alt="<?php echo $settings['video_items'][$index]['video_poster']['alt']; ?>"
-								data-bs-toggle="modal" 
+								data-bs-toggle="modal"
 								data-bs-target="#exampleModal<?php echo $index; ?>"
                             >
                         </div>

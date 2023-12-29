@@ -1,7 +1,7 @@
 .blog__card__image {
     min-height: 320px;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 145%;
     background-position: center center;
 }
 

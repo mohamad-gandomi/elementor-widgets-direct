@@ -363,7 +363,7 @@ class Elementor_Video_Widget extends \Elementor\Widget_Base {
         ?>
         <!-- VIDEO
         ================================================== -->
-        <section class="main-video">
+        <section class="main-video" <?php echo !is_admin() ? 'data-aos-once="true" data-aos-delay="50" data-aos="fade-up"' : '' ; ?>>
             <div class="container">
                 <div class="row align-items-center">
 

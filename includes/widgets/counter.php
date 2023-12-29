@@ -392,7 +392,7 @@ class Elementor_Counter_Widget extends \Elementor\Widget_Base {
         ?>
         <!-- COUNTER
         ================================================== -->
-        <section class="counter">
+        <section class="counter" <?php echo !is_admin() ? 'data-aos-once="true" data-aos-delay="50" data-aos="fade-up"' : '' ; ?>>
             <div class="container">
 
                 <!-- Title -->

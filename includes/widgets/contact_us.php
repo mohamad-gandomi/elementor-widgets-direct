@@ -185,7 +185,7 @@ class Elementor_Contact_Us_Widget extends \Elementor\Widget_Base {
         ?>
         <!-- CONTACT US
         ================================================== -->
-        <section class="main-contact-us">
+        <section class="main-contact-us" <?php echo !is_admin() ? 'data-aos-once="true" data-aos-delay="50" data-aos="fade-up"' : '' ; ?>>
             <div class="container">
                 <div class="row align-items-center">
                     <!-- Images -->

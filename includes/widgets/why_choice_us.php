@@ -344,7 +344,7 @@ class Elementor_Why_Choice_Us_Widget extends \Elementor\Widget_Base {
 
 
                 <!-- Cards -->
-                <div class="row">
+                <div class="row" <?php echo !is_admin() ? 'data-aos-once="true" data-aos-delay="50" data-aos="fade-up"' : '' ; ?>>
                     <?php
                     foreach ( $settings['why_choice_us_items'] as $index => $item ) {
                         $number = $settings['why_choice_us_items'][$index]['why_choice_us_number'];
@@ -353,7 +353,7 @@ class Elementor_Why_Choice_Us_Widget extends \Elementor\Widget_Base {
                         $image = $settings['why_choice_us_items'][$index]['why_choice_us_image'];
                     ?>
                         <!-- Card -->
-                        <div class="col-12 col-xl-4 mb-8 mb-xl-0">
+                        <div class="col-12 col-xl-4 mb-8 mb-xl-0 ">
                             <div class="direct-card rounded-6 px-7 pb-7 pt-10">
                                 <div class="d-flex mb-10">
                                     <span class="font-pinar ms-6 direct-card__number"><?php echo $number; ?></span>

@@ -237,7 +237,7 @@ class Elementor_Blog_Widget extends \Elementor\Widget_Base {
         ?>
         <!-- BLOG
         ================================================== -->
-        <section class="blog <?php echo 'blog' == $settings['design'] ? 'blog-archive' : '' ; ?>">
+        <section class="blog <?php echo 'blog' == $settings['design'] ? 'blog-archive' : '' ; ?>" <?php echo !is_admin() ? 'data-aos-once="true" data-aos-delay="50" data-aos="fade-up"' : '' ; ?>>
             <div class="container">
 
                 <!-- Blog Posts -->
