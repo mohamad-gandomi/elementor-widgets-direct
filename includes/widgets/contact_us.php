@@ -192,7 +192,7 @@ class Elementor_Contact_Us_Widget extends \Elementor\Widget_Base {
                     <div class="col-12">
                         <div class="row">
 
-                            <div class="col-12 col-xl-6 main-contact-us__image text-center text-xl-start">
+                            <div class="col-6 main-contact-us__image text-center text-xl-start">
                                 <img src="<?php echo $settings['first_image']['url']; ?>" alt="<?php echo $settings['first_image']['alt']; ?>" >
 								<?php if($settings['first_message']): ?>
                                 <div class="bg-gray-800 text-gray-100 d-inline-block main-contact-us__image__text main-contact-us__image__text--female text-end">
@@ -201,7 +201,7 @@ class Elementor_Contact_Us_Widget extends \Elementor\Widget_Base {
 								<?php endif; ?>
                             </div>
 
-                            <div class="col-12 col-xl-6 main-contact-us__image mt-8 mt-xl-12 text-center text-xl-end">
+                            <div class="col-6 main-contact-us__image mt-8 mt-xl-12 text-center text-xl-end">
                                 <img src="<?php echo $settings['second_image']['url']; ?>" alt="<?php echo $settings['second_image']['alt']; ?>" >
 								<?php if($settings['second_message']): ?>
                                 <div class="bg-gray-800 text-gray-100 d-inline-block main-contact-us__image__text main-contact-us__image__text--male">

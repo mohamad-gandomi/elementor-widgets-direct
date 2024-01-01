@@ -290,7 +290,7 @@ class Elementor_Hero_Widget extends \Elementor\Widget_Base {
         ?>
         <!-- HERO
         ================================================== -->
-        <section class="main-welcome py-14 py-xl-16 text-light position-relative">
+        <section class="main-welcome py-14 pb-xl-16 pt-xl-14 text-light position-relative">
             <div class="container">
                 <div class="row">
                     <div class="col-12 col-xl-6 text-center text-xl-end">

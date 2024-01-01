@@ -181,6 +181,14 @@ class Elementor_Testimonials_Widget extends \Elementor\Widget_Base {
 		);
 
 		$repeater->add_control(
+			'icon_class_name',
+			[
+				'label' => esc_html__( 'Icon Class Name', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+			]
+		);
+
+		$repeater->add_control(
 			'message',
 			[
 				'label' => esc_html__( 'Message', 'elementor-widgets-direct' ),
@@ -368,7 +376,16 @@ class Elementor_Testimonials_Widget extends \Elementor\Widget_Base {
 										<span class="font-pinar customer-testimonials-carousel__card__subtitle"><?php echo $settings['testimonial_items'][$index]['subtitle']; ?></span>
 									</div>
 								</div>
-								<span class="quote-mark text-gray-600">”</span>
+								<span class="quote-mark <?php echo $settings['testimonial_items'][$index]['icon_class_name']; ?> text-gray-600 fs-1">
+									<span class="path1"></span>
+									<span class="path2"></span>
+									<span class="path3"></span>
+									<span class="path4"></span>
+									<span class="path5"></span>
+									<span class="path6"></span>
+									<span class="path7"></span>
+									<span class="path8"></span>
+								</span>
 							</div>
 							<p class="customer-testimonials-carousel__card__message mb-0"><?php echo $this->truncateText($settings['testimonial_items'][$index]['message'], 130); ?></p>
 						</div>

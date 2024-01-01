@@ -245,7 +245,7 @@ class Elementor_Article_Blog_Tab_Widget extends \Elementor\Widget_Base {
                                                         ?>
                                                     </span>
                                                 </div>
-                                                <div class="p-3 text-gray-50 me-3 d-flex align-items-center rounded-2 bta-cart__image__bottom__comments">
+                                                <div class="p-3 text-white-200 me-3 d-flex align-items-center rounded-2 bta-cart__image__bottom__comments">
                                                     <span class="display-5 ms-2 icon-message-text-line"></span>
                                                     <span class="fs-4"><?php echo $post_comments_count ?></span>
                                                 </div>
