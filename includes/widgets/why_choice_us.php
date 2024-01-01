@@ -49,7 +49,7 @@ class Elementor_Why_Choice_Us_Widget extends \Elementor\Widget_Base {
 	 * @return string Widget name.
 	 */
 	public function get_name() {
-		return 'Why Choice Us';
+		return 'why-choice-us';
 	}
 
 	/**
@@ -128,7 +128,7 @@ class Elementor_Why_Choice_Us_Widget extends \Elementor\Widget_Base {
 	protected function register_controls() {
 
 		$this->start_controls_section(
-			'content_section',
+			'why_choice_us_content_section',
 			[
 				'label' => esc_html__( 'Why Choice Us Content', 'elementor-widgets-direct' ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,

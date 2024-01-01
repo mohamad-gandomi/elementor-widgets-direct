@@ -200,16 +200,6 @@ class Elementor_Product_Form_Widget extends \Elementor\Widget_Base {
 			]
 		);
 
-		$this->add_control(
-			'gallery',
-			[
-				'label' => esc_html__( 'Choice Images', 'elementor-widgets-direct' ),
-				'type' => \Elementor\Controls_Manager::GALLERY,
-				'show_label' => false,
-				'default' => [],
-			]
-		);
-
         $this->add_control(
 			'product_icon',
 			[
@@ -250,6 +240,16 @@ class Elementor_Product_Form_Widget extends \Elementor\Widget_Base {
 			[
 				'label' => esc_html__( 'Product Color', 'elementor-widgets-direct' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
+			]
+		);
+
+		$repeater->add_control(
+			'product_gallery',
+			[
+				'label' => esc_html__( 'Choice Black Images', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::GALLERY,
+				'show_label' => false,
+				'default' => [],
 			]
 		);
 
@@ -333,23 +333,23 @@ class Elementor_Product_Form_Widget extends \Elementor\Widget_Base {
                         <div class="product__gallery my-10">
                             <!-- Product Image -->
                             <div class="product__gallery__image d-inline-block">
-								<?php if(!$settings['gallery']) {
-									?>
+
+								<?php if( $settings['product_image']['url'] ): ?>
+
                                 	<img class="w-100" src="<?php echo esc_url($settings['product_image']['url']); ?>" alt="<?php echo esc_url($settings['product_image']['alt']); ?>" >
-									<?php
-								} else {
-									?>
-									<!-- Swiper -->
-									<div class="slideshow-container">
-											<?php
-											foreach ( $settings['gallery'] as $image ) {
-												echo '<div class="mySlides"><img class="" src="' . esc_attr( $image['url'] ) . '"></div>';
-											}
-											?>
-									</div>
-									<?php
-								}
-								?>
+								
+								<?php else: ?>
+									<?php foreach ( $settings['product_variables'] as $index => $item ): ?>
+										<div class="slideshow-container slider<?php echo $index ?>">
+												<?php
+												foreach ( $settings['product_variables'][$index]['product_gallery'] as $image ) {
+													echo '<div class="mySlides"><img class="" src="' . esc_attr( $image['url'] ) . '"></div>';
+												}
+												?>
+										</div>
+									<?php endforeach; ?>
+								<?php endif; ?>
+
 								<div class="product__gallery__image__blur product_background_color"></div>
                                 <span class="icon-box-2-bulk display-1 position-absolute bottom-0 end-0 product_color">
                                     <span class="path1"></span>
@@ -396,7 +396,7 @@ class Elementor_Product_Form_Widget extends \Elementor\Widget_Base {
                         <div class="product__info__variables d-flex align-items-center mb-7">
 
                         <?php foreach ( $settings['product_variables'] as $index => $item ) { ?>
-                            <button class="btn btn-gray-700 text-white-500 rounded-3 p-3 d-flex ms-3">
+                            <button class="btn btn-gray-700 text-white-500 rounded-3 p-3 d-flex ms-3" id="slider<?php echo $index; ?>">
                                 <span style="background-color: <?php echo $settings['product_variables'][$index]['product_color']; ?>" class="product__info__variables__colorIndicator"></span>
                                 <span><?php echo $settings['product_variables'][$index]['product_color_title']; ?></span>
                             </button>

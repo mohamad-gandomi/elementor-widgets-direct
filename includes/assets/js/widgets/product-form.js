@@ -2,112 +2,115 @@ class Product_Form extends elementorModules.frontend.handlers.Base {
 
     bindEvents() {
 
-        let slideIndex = 1;
-        showSlides(slideIndex);
+        class Slider {
+            constructor(containerClassName) {
+                this.slideIndex = 1;
+                this.container = document.querySelector(`.${containerClassName}`);
+                this.slides = this.container.getElementsByClassName("mySlides");
+                this.showSlides(this.slideIndex);
 
-        function plusSlides(n) {
-            showSlides(slideIndex += n);
+                this.container.addEventListener('wheel', (event) => {
+                    event.preventDefault();
+                    if (event.deltaY < 0) {
+                        this.plusSlides(-1);
+                    } else {
+                        this.plusSlides(1);
+                    }
+                });
+
+                this.isDragging = false;
+                this.startPosition = 0;
+                this.pixelsToChangeSlide = 10;
+
+                this.container.addEventListener('mousedown', (e) => {
+                    this.isDragging = true;
+                    this.startPosition = e.clientX;
+                });
+
+                this.container.addEventListener('mousemove', (e) => {
+                    if (!this.isDragging) return;
+
+                    const currentPosition = e.clientX;
+                    const difference = currentPosition - this.startPosition;
+                    const slidesToChange = Math.floor(difference / this.pixelsToChangeSlide);
+
+                    if (slidesToChange !== 0) {
+                        this.plusSlides(slidesToChange);
+                        this.startPosition = currentPosition;
+                    }
+                });
+
+                this.container.addEventListener('mouseup', () => {
+                    this.isDragging = false;
+                });
+
+                this.container.addEventListener('mouseleave', () => {
+                    this.isDragging = false;
+                });
+
+                this.container.addEventListener('touchstart', (e) => {
+                    this.isDragging = true;
+                    this.startPosition = e.touches[0].clientX;
+                    e.preventDefault();
+                });
+
+                this.container.addEventListener('touchmove', (e) => {
+                    if (!this.isDragging) return;
+
+                    const currentPosition = e.touches[0].clientX;
+                    const difference = currentPosition - this.startPosition;
+                    const slidesToChange = Math.floor(difference / this.pixelsToChangeSlide);
+
+                    if (slidesToChange !== 0) {
+                        this.plusSlides(slidesToChange);
+                        this.startPosition = currentPosition;
+                    }
+                    e.preventDefault();
+                });
+
+                this.container.addEventListener('touchend', () => {
+                    this.isDragging = false;
+                });
+            }
+
+            plusSlides(n) {
+                this.showSlides(this.slideIndex += n);
+            }
+
+            currentSlide(n) {
+                this.showSlides(this.slideIndex = n);
+            }
+
+            showSlides(n) {
+                let i;
+                if (n > this.slides.length) { this.slideIndex = 1; }
+                if (n < 1) { this.slideIndex = this.slides.length; }
+                for (i = 0; i < this.slides.length; i++) {
+                    this.slides[i].style.display = "none";
+                }
+                this.slides[this.slideIndex - 1].style.display = "block";
+            }
         }
 
-        function currentSlide(n) {
-            showSlides(slideIndex = n);
-        }
+        const slider1 = new Slider('slider0');
+        const slider2 = new Slider('slider1');
 
-        function showSlides(n) {
-            let i;
-            let slides = document.getElementsByClassName("mySlides");
+        jQuery(document).ready(function ($) {
+            // Initially show slider0
+            $('.slider0').show();
+            $('.slider1').hide();
 
-            if (n > slides.length) { slideIndex = 1 }
-            if (n < 1) { slideIndex = slides.length }
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            slides[slideIndex - 1].style.display = "block";
-        }
+            // Click event for slider0 button
+            $('#slider0').on('click', function () {
+                $('.slider0').show();
+                $('.slider1').hide();
+            });
 
-        // Add an event listener for the mouse wheel
-        document.querySelector('.slideshow-container').addEventListener('wheel', function (event) {
-            event.preventDefault();
-            // Check if the mouse wheel scrolled up or down
-            if (event.deltaY < 0) {
-                plusSlides(-1); // Scroll up: Show previous slide
-            } else {
-                plusSlides(1); // Scroll down: Show next slide
-            }
-        });
-
-        //======================================================================
-        // JavaScript to Handle Continuous Slide Change on Drag
-        //======================================================================
-
-        let isDragging = false;
-        let startPosition = 0;
-        const pixelsToChangeSlide = 10; // Adjust this value to change sensitivity
-
-        // Event listener for mouse down
-        document.querySelector('.slideshow-container').addEventListener('mousedown', function (e) {
-            isDragging = true;
-            startPosition = e.clientX;
-        });
-
-        // Event listener for mouse move
-        document.querySelector('.slideshow-container').addEventListener('mousemove', function (e) {
-            if (!isDragging) return;
-
-            const currentPosition = e.clientX;
-            const difference = currentPosition - startPosition;
-            const slidesToChange = Math.floor(difference / pixelsToChangeSlide);
-
-            if (slidesToChange !== 0) {
-                plusSlides(slidesToChange); // Change slides based on the drag distance
-                startPosition = currentPosition; // Update start position for continuous dragging
-            }
-        });
-
-        // Event listener for mouse up
-        document.querySelector('.slideshow-container').addEventListener('mouseup', function () {
-            isDragging = false;
-        });
-
-        // Event listener for mouse leave
-        document.querySelector('.slideshow-container').addEventListener('mouseleave', function () {
-            isDragging = false;
-        });
-
-        //======================================================================
-        // JavaScript to Handle Continuous Slide Change on Drag (for Touch Devices)
-        //======================================================================
-
-        // Event listener for touch start
-        document.querySelector('.slideshow-container').addEventListener('touchstart', function (e) {
-            isDragging = true;
-            startPosition = e.touches[0].clientX;
-            startX = startPosition;
-            e.preventDefault(); // Prevent default touch behavior
-        });
-
-        // Event listener for touch move
-        document.querySelector('.slideshow-container').addEventListener('touchmove', function (e) {
-            if (!isDragging) return;
-
-            const currentPosition = e.touches[0].clientX;
-            const difference = currentPosition - startPosition;
-            const slidesToChange = Math.floor(difference / pixelsToChangeSlide);
-
-            if (slidesToChange !== 0) {
-                plusSlides(slidesToChange); // Change slides based on the drag distance
-                startPosition = currentPosition; // Update start position for continuous dragging
-            }
-            e.preventDefault(); // Prevent default touch behavior
-        });
-
-        // Event listener for touch end
-        document.querySelector('.slideshow-container').addEventListener('touchend', function () {
-            isDragging = false;
-            // Determine if it was a swipe or just a tap
-            if (Math.abs(startX - startPosition) < 5) {
-                // Handle tap or click event here if needed
-            }
+            // Click event for slider1 button
+            $('#slider1').on('click', function () {
+                $('.slider1').show();
+                $('.slider0').hide();
+            });
         });
 
     }
