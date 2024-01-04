@@ -330,7 +330,7 @@ class Elementor_Hero_Widget extends \Elementor\Widget_Base {
                     <div class="col-12 col-xl-6">
 						<?php if('hosted' == $settings['video_type']): ?>
 						    <div class="video-container rounded-5 bg-gray-800 mt-5">
-								<video class="w-100 rounded-5 hero_video" <?php echo $settings['auto_play'] ? 'autoplay=""' : 'controls' ?> loop="" muted="muted" playsinline="" controlslist="nodownload" style="object-fit: cover;">
+								<video class="w-100 rounded-5 hero_video" <?php echo $settings['auto_play'] ? 'autoplay="" muted="muted"' : 'controls' ?> loop="" playsinline="" controlslist="nodownload" style="object-fit: cover;">
 									<source src="<?php echo $video; ?>" type="video/mp4">
 									Your browser does not support the video tag.
 								</video>

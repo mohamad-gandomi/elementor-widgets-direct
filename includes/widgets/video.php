@@ -402,7 +402,7 @@ class Elementor_Video_Widget extends \Elementor\Widget_Base {
 						<?php if('hosted' == $settings['video_type']): ?>
 
 						    <div class="video-container rounded-5 bg-gray-800 mt-5">
-								<video class="w-100 rounded-5 direct_video" <?php echo $settings['auto_play'] ? 'autoplay=""' : 'controls' ?> muted="muted" playsinline="" controlslist="nodownload" style="object-fit: cover;">
+								<video class="w-100 rounded-5 direct_video" <?php echo $settings['auto_play'] ? 'autoplay="" muted="muted"' : 'controls' ?> playsinline="" controlslist="nodownload" style="object-fit: cover;">
 									<source src="<?php echo esc_url($settings['video']['url']); ?>" type="video/mp4">
 									Your browser does not support the video tag.
 								</video>

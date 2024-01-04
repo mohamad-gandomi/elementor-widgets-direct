@@ -354,9 +354,9 @@ class Elementor_Why_Choice_Us_Widget extends \Elementor\Widget_Base {
                     ?>
                         <!-- Card -->
                         <div class="col-12 col-xl-4 mb-8 mb-xl-0 ">
-                            <div class="direct-card rounded-6 px-7 pb-7 pt-10">
+                            <div class="direct-card rounded-6 px-5 pb-7 pt-10">
                                 <div class="d-flex mb-10">
-                                    <span class="font-pinar ms-6 direct-card__number"><?php echo $number; ?></span>
+                                    <span class="font-pinar ms-3 direct-card__number"><?php echo $number; ?></span>
                                     <div>
                                         <h3 class="mb-4"><?php echo $title; ?></h3>
                                         <p class="mb-2 direct-card__text"><?php echo $description; ?></p>

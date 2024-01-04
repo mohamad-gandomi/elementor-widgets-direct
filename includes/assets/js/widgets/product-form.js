@@ -2,6 +2,24 @@ class Product_Form extends elementorModules.frontend.handlers.Base {
 
     bindEvents() {
 
+        jQuery(document).ready(function ($) {
+            // Initially show slider0
+            $('.slider0').show();
+            $('.slider1').hide();
+
+            // Click event for slider0 button
+            $('#slider0').on('click', function () {
+                $('.slider0').show();
+                $('.slider1').hide();
+            });
+
+            // Click event for slider1 button
+            $('#slider1').on('click', function () {
+                $('.slider1').show();
+                $('.slider0').hide();
+            });
+        });
+
         class Slider {
             constructor(containerClassName) {
                 this.slideIndex = 1;
@@ -9,14 +27,14 @@ class Product_Form extends elementorModules.frontend.handlers.Base {
                 this.slides = this.container.getElementsByClassName("mySlides");
                 this.showSlides(this.slideIndex);
 
-                this.container.addEventListener('wheel', (event) => {
-                    event.preventDefault();
-                    if (event.deltaY < 0) {
-                        this.plusSlides(-1);
-                    } else {
-                        this.plusSlides(1);
-                    }
-                });
+                // this.container.addEventListener('wheel', (event) => {
+                //     event.preventDefault();
+                //     if (event.deltaY < 0) {
+                //         this.plusSlides(-1);
+                //     } else {
+                //         this.plusSlides(1);
+                //     }
+                // });
 
                 this.isDragging = false;
                 this.startPosition = 0;
@@ -92,26 +110,11 @@ class Product_Form extends elementorModules.frontend.handlers.Base {
             }
         }
 
-        const slider1 = new Slider('slider0');
-        const slider2 = new Slider('slider1');
+        if ($('.slideshow-container').length) {
+            const slider1 = new Slider('slider0');
+            const slider2 = new Slider('slider1');
+        }
 
-        jQuery(document).ready(function ($) {
-            // Initially show slider0
-            $('.slider0').show();
-            $('.slider1').hide();
-
-            // Click event for slider0 button
-            $('#slider0').on('click', function () {
-                $('.slider0').show();
-                $('.slider1').hide();
-            });
-
-            // Click event for slider1 button
-            $('#slider1').on('click', function () {
-                $('.slider1').show();
-                $('.slider0').hide();
-            });
-        });
 
     }
 
