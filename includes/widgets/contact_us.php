@@ -167,6 +167,81 @@ class Elementor_Contact_Us_Widget extends \Elementor\Widget_Base {
 			]
 		);
 
+		$this->end_controls_section();
+
+		/* ==========================================================================
+			DESCRIPTION STYLES
+		========================================================================== */
+
+		$this->start_controls_section(
+			'description_style',
+			[
+				'label' => esc_html__( 'Description', 'elementor-widgets-direct' ),
+				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$this->add_control(
+			'description_dark_color',
+			[
+				'label' => esc_html__( 'Title Dark Color', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'default' => '#e0e2e7',
+				'selectors' => [
+					'[data-bs-theme="dark"] {{WRAPPER}} .contact-us-description' => 'color: {{VALUE}} !important',
+				],
+			]
+		);
+
+        $this->add_control(
+			'description_light_color',
+			[
+				'label' => esc_html__( 'Title Light Color', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'default' => '#14161b',
+				'selectors' => [
+					'[data-bs-theme="light"] {{WRAPPER}} .contact-us-description' => 'color: {{VALUE}} !important',
+				],
+			]
+		);
+
+		$this->add_control(
+			'description_dark_background_color',
+			[
+				'label' => esc_html__( 'Description Dark Background Color', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'default' => '#292d35',
+				'selectors' => [
+					'[data-bs-theme="dark"] {{WRAPPER}} .contact-us-description' => 'background-color: {{VALUE}} !important',
+				],
+			]
+		);
+
+		$this->add_control(
+			'description_light_background_color',
+			[
+				'label' => esc_html__( 'Description Light Background Color', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'default' => '#fff',
+				'selectors' => [
+					'[data-bs-theme="light"] {{WRAPPER}} .contact-us-description' => 'background-color: {{VALUE}} !important',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'description_typography',
+				'selector' => '{{WRAPPER}} .contact-us-description',
+				'global' => [
+					'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_PRIMARY,
+				],
+			]
+		);
+
+		$this->end_controls_section();
+
 
 	}
 
@@ -195,7 +270,7 @@ class Elementor_Contact_Us_Widget extends \Elementor\Widget_Base {
                             <div class="col-6 main-contact-us__image text-center text-xl-start">
                                 <img src="<?php echo $settings['first_image']['url']; ?>" alt="<?php echo $settings['first_image']['alt']; ?>" >
 								<?php if($settings['first_message']): ?>
-                                <div class="bg-gray-800 text-gray-100 d-inline-block main-contact-us__image__text main-contact-us__image__text--female text-end">
+                                <div class="contact-us-description d-inline-block main-contact-us__image__text main-contact-us__image__text--female text-end">
                                     <p class="m-0"><?php echo $settings['first_message']; ?></p>
                                 </div>
 								<?php endif; ?>
@@ -204,7 +279,7 @@ class Elementor_Contact_Us_Widget extends \Elementor\Widget_Base {
                             <div class="col-6 main-contact-us__image mt-8 mt-xl-12 text-center text-xl-end">
                                 <img src="<?php echo $settings['second_image']['url']; ?>" alt="<?php echo $settings['second_image']['alt']; ?>" >
 								<?php if($settings['second_message']): ?>
-                                <div class="bg-gray-800 text-gray-100 d-inline-block main-contact-us__image__text main-contact-us__image__text--male">
+                                <div class="contact-us-description d-inline-block main-contact-us__image__text main-contact-us__image__text--male">
                                     <p class="m-0"><?php echo $settings['second_message']; ?></p>
                                 </div>
 								<?php endif; ?>
