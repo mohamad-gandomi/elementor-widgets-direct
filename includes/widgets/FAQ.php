@@ -170,6 +170,152 @@ class Elementor_FAQ_Widget extends \Elementor\Widget_Base {
 
 		$this->end_controls_section();
 
+		/* ==========================================================================
+			QUESTION STYLE
+		========================================================================== */
+
+		$this->start_controls_section(
+			'question_style',
+			[
+				'label' => esc_html__( 'Question', 'elementor-widgets-direct' ),
+				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$this->add_control(
+			'question_dark_color',
+			[
+				'label' => esc_html__( 'Question Dark Color', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'default' => '#f0f1f3',
+				'selectors' => [
+					'[data-bs-theme="dark"] {{WRAPPER}} .faq-question' => 'color: {{VALUE}} !important',
+				],
+			]
+		);
+
+        $this->add_control(
+			'question_light_color',
+			[
+				'label' => esc_html__( 'Question Light Color', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'default' => '#3d4350',
+				'selectors' => [
+					'[data-bs-theme="light"] {{WRAPPER}} .faq-question' => 'color: {{VALUE}} !important',
+				],
+			]
+		);
+
+		$this->add_control(
+			'question_dark_background_color',
+			[
+				'label' => esc_html__( 'Dark Background Color', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'default' => '#16161d',
+				'selectors' => [
+					'[data-bs-theme="dark"] {{WRAPPER}} .faq-question' => 'background-color: {{VALUE}} !important',
+				],
+			]
+		);
+
+		$this->add_control(
+			'question_light_background_color',
+			[
+				'label' => esc_html__( 'Light Background Color', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'default' => '#fafafa',
+				'selectors' => [
+					'[data-bs-theme="light"] {{WRAPPER}} .faq-question' => 'background-color: {{VALUE}} !important',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'question_typography',
+				'selector' => '{{WRAPPER}} .faq-question',
+				'global' => [
+					'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_PRIMARY,
+				],
+			]
+		);
+
+		$this->end_controls_section();
+
+		/* ==========================================================================
+			ANSWERES STYLE
+		========================================================================== */
+
+		$this->start_controls_section(
+			'answere_style',
+			[
+				'label' => esc_html__( 'Answer', 'elementor-widgets-direct' ),
+				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$this->add_control(
+			'answere_dark_color',
+			[
+				'label' => esc_html__( 'Answer Dark Color', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'default' => '#ffffff',
+				'selectors' => [
+					'[data-bs-theme="dark"] {{WRAPPER}} .faq-answere' => 'color: {{VALUE}} !important',
+				],
+			]
+		);
+
+        $this->add_control(
+			'answere_light_color',
+			[
+				'label' => esc_html__( 'Answer Light Color', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'default' => '#3d4350',
+				'selectors' => [
+					'[data-bs-theme="light"] {{WRAPPER}} .faq-answere' => 'color: {{VALUE}} !important',
+				],
+			]
+		);
+
+		$this->add_control(
+			'answer_dark_background_color',
+			[
+				'label' => esc_html__( 'Dark Background Color', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'default' => '#16161d',
+				'selectors' => [
+					'[data-bs-theme="dark"] {{WRAPPER}} .faq-answer' => 'background-color: {{VALUE}} !important',
+				],
+			]
+		);
+
+		$this->add_control(
+			'answer_light_background_color',
+			[
+				'label' => esc_html__( 'Light Background Color', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'default' => '#fafafa',
+				'selectors' => [
+					'[data-bs-theme="light"] {{WRAPPER}} .faq-answer' => 'background-color: {{VALUE}} !important',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'answere_typography',
+				'selector' => '{{WRAPPER}} .faq-answere',
+				'global' => [
+					'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_PRIMARY,
+				],
+			]
+		);
+
+		$this->end_controls_section();
+
 	}
 
 	/**
@@ -197,7 +343,7 @@ class Elementor_FAQ_Widget extends \Elementor\Widget_Base {
                                     <div class="accordion-item bg-black-500 mb-9">
                                         <h2 class="accordion-header border-0" id="flush-headingOne-header">
                                             <button 
-                                                class="accordion-button collapsed bg-black-500 text-gray-50 fs-2 fw-700 shadow-none pb-8 pt-0 px-0 text-end" 
+                                                class="faq-question accordion-button collapsed shadow-none pb-8 pt-0 px-0 text-end" 
                                                 type="button" 
                                                 data-bs-toggle="collapse" 
                                                 data-bs-target="#flush-collapse<?php echo $settings['faq_items'][$index]['_id']; ?>" 
@@ -209,10 +355,10 @@ class Elementor_FAQ_Widget extends \Elementor\Widget_Base {
                                         </h2>
                                         <div 
                                             id="flush-collapse<?php echo $settings['faq_items'][$index]['_id']; ?>" 
-                                            class="accordion-collapse collapse text-light bg-black-500 fs-4 border-0" 
+                                            class="accordion-collapse collapse faq-answere border-0" 
                                             data-bs-parent="#accordionFlushExample"
                                         >
-                                            <div class="accordion-body pb-6 pt-0 px-0"><?php echo $settings['faq_items'][$index]['faq_answere']; ?></div>
+                                            <div class="faq-answere accordion-body pb-6 pt-0 px-0"><?php echo $settings['faq_items'][$index]['faq_answere']; ?></div>
                                         </div>
                                     </div>
                             <?php } ?>
