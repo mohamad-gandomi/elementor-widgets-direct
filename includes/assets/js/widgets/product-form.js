@@ -9,14 +9,34 @@ class Product_Form extends elementorModules.frontend.handlers.Base {
 
             // Click event for slider0 button
             $('#slider0').on('click', function () {
+                $(this).addClass('selected')
                 $('.slider0').show();
                 $('.slider1').hide();
+                $('#slider1').removeClass('selected');
             });
 
             // Click event for slider1 button
             $('#slider1').on('click', function () {
+                $(this).addClass('selected')
                 $('.slider1').show();
                 $('.slider0').hide();
+                $('#slider0').removeClass('selected');
+            });
+
+            $('.color-btn').on('click', function () {
+                var colorTitle = $(this).data('title');
+                $('#colorInput').val(colorTitle);
+            });
+
+            $('#product_add_to_cart').on('click', function (event) {
+                if ($('.color-btn').length && !$('.color-btn').hasClass('selected')) {
+                    event.preventDefault(); // Prevent form submission
+                    alert('لطفا رنگ محصول را انتخاب کنید');
+                    // Scroll to the first element with class color-btn
+                    $('html, body').animate({
+                        scrollTop: $('.color-btn:first').offset().top - 200
+                    }, 'slow');
+                }
             });
         });
 
@@ -115,6 +135,22 @@ class Product_Form extends elementorModules.frontend.handlers.Base {
             const slider2 = new Slider('slider1');
         }
 
+        var stickySection = $('.product_form_sticky');
+        var scrollOffset = 500; // Set the scroll offset to 800 pixels
+
+        $(window).scroll(function () {
+            var scrollPos = $(window).scrollTop();
+
+            if (scrollPos >= scrollOffset) {
+                stickySection.addClass('sticky');
+            } else {
+                stickySection.removeClass('sticky');
+            }
+        });
+
+        $('#product_add_to_cart_sticky').on('click', function () {
+            $('#product_add_to_cart').click();
+        })
 
     }
 

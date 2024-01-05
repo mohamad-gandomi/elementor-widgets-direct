@@ -129,6 +129,10 @@ class Elementor_Hero_Widget extends \Elementor\Widget_Base {
 	 */
 	protected function register_controls() {
 
+		/* ==========================================================================
+			HERO CONTENTS
+		========================================================================== */
+
 		$this->start_controls_section(
 			'content_section',
 			[
@@ -141,7 +145,7 @@ class Elementor_Hero_Widget extends \Elementor\Widget_Base {
 			'hero_title',
 			[
 				'label' => esc_html__( 'Title', 'elementor-widgets-direct' ),
-				'type' => \Elementor\Controls_Manager::WYSIWYG,
+				'type' => \Elementor\Controls_Manager::TEXTAREA,
 				'default' => esc_html__( 'عنوان', 'elementor-widgets-direct' ),
 			]
 		);
@@ -150,7 +154,7 @@ class Elementor_Hero_Widget extends \Elementor\Widget_Base {
 			'hero_description',
 			[
 				'label' => esc_html__( 'Description', 'elementor-widgets-direct' ),
-				'type' => \Elementor\Controls_Manager::WYSIWYG,
+				'type' => \Elementor\Controls_Manager::TEXTAREA,
 				'default' => esc_html__( 'لورم اپسیوم متن ساختگی با تولید نامفهوم از محتوای داخلی', 'elementor-widgets-direct' ),
 			]
 		);
@@ -267,6 +271,201 @@ class Elementor_Hero_Widget extends \Elementor\Widget_Base {
 
 		$this->end_controls_section();
 
+		/* ==========================================================================
+			TITLE STYLES
+		========================================================================== */
+
+		$this->start_controls_section(
+			'title_style',
+			[
+				'label' => esc_html__( 'Title', 'elementor-widgets-direct' ),
+				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$this->add_control(
+			'title_dark_color',
+			[
+				'label' => esc_html__( 'Title Dark Color', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'default' => '#fff',
+				'selectors' => [
+					'[data-bs-theme="dark"] {{WRAPPER}} .hero-title' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+        $this->add_control(
+			'title_light_color',
+			[
+				'label' => esc_html__( 'Title Light Color', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'default' => '#14161b',
+				'selectors' => [
+					'[data-bs-theme="light"] {{WRAPPER}} .hero-title' => 'color: {{VALUE}}',
+				],
+			]
+		);
+
+		$this->add_control(
+			'title_span_dark_color',
+			[
+				'label' => esc_html__( 'Span Dark Color', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'default' => '#ffbe15',
+				'selectors' => [
+					'[data-bs-theme="dark"] {{WRAPPER}} .hero-title span' => 'color: {{VALUE}} !important',
+				],
+			]
+		);
+
+        $this->add_control(
+			'title_span_light_color',
+			[
+				'label' => esc_html__( 'Span Light Color', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'default' => '#257cff',
+				'selectors' => [
+					'[data-bs-theme="light"] {{WRAPPER}} .hero-title span' => 'color: {{VALUE}} !important',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'title_typography',
+				'selector' => '{{WRAPPER}} .hero-title',
+				'global' => [
+					'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_PRIMARY,
+				],
+			]
+		);
+
+		$this->end_controls_section();
+
+		/* ==========================================================================
+			DESCRIPTION STYLES
+		========================================================================== */
+
+		$this->start_controls_section(
+			'description_style',
+			[
+				'label' => esc_html__( 'Description', 'elementor-widgets-direct' ),
+				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$this->add_control(
+			'description_dark_color',
+			[
+				'label' => esc_html__( 'Title Dark Color', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'default' => '#c2c6ce',
+				'selectors' => [
+					'[data-bs-theme="dark"] {{WRAPPER}} .hero-description' => 'color: {{VALUE}} !important',
+				],
+			]
+		);
+
+        $this->add_control(
+			'description_light_color',
+			[
+				'label' => esc_html__( 'Title Light Color', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'default' => '#14161b',
+				'selectors' => [
+					'[data-bs-theme="light"] {{WRAPPER}} .hero-description' => 'color: {{VALUE}} !important',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'description_typography',
+				'selector' => '{{WRAPPER}} .hero-description',
+				'global' => [
+					'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_PRIMARY,
+				],
+			]
+		);
+
+		$this->end_controls_section();
+
+		/* ==========================================================================
+			BUTTON STYLES
+		========================================================================== */
+
+		$this->start_controls_section(
+			'button_style',
+			[
+				'label' => esc_html__( 'Button', 'elementor-widgets-direct' ),
+				'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$this->add_control(
+			'button_dark_color',
+			[
+				'label' => esc_html__( 'Button Dark Color', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'default' => '#ffbe15',
+				'selectors' => [
+					'[data-bs-theme="dark"] {{WRAPPER}} .hero-button' => 'color: {{VALUE}} !important',
+				],
+			]
+		);
+
+        $this->add_control(
+			'button_light_color',
+			[
+				'label' => esc_html__( 'Button Light Color', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'default' => '#257cff',
+				'selectors' => [
+					'[data-bs-theme="light"] {{WRAPPER}} .hero-button' => 'color: {{VALUE}} !important',
+				],
+			]
+		);
+
+		$this->add_group_control(
+			\Elementor\Group_Control_Typography::get_type(),
+			[
+				'name' => 'button_typography',
+				'selector' => '{{WRAPPER}} .hero-button',
+				'global' => [
+					'default' => \Elementor\Core\Kits\Documents\Tabs\Global_Typography::TYPOGRAPHY_PRIMARY,
+				],
+			]
+		);
+
+		$this->add_control(
+			'button_dark_background_color',
+			[
+				'label' => esc_html__( 'Button Dark Background Color', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'default' => '#664c0854',
+				'selectors' => [
+					'[data-bs-theme="dark"] {{WRAPPER}} .hero-button:hover' => 'background-color: {{VALUE}} !important',
+				],
+			]
+		);
+
+		$this->add_control(
+			'button_light_background_color',
+			[
+				'label' => esc_html__( 'Button Light Background Color', 'elementor-widgets-direct' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'default' => '#D3E5FF',
+				'selectors' => [
+					'[data-bs-theme="light"] {{WRAPPER}} .hero-button:hover' => 'background-color: {{VALUE}} !important',
+				],
+			]
+		);
+
+		$this->end_controls_section();
+
 	}
 
 	/**
@@ -296,8 +495,8 @@ class Elementor_Hero_Widget extends \Elementor\Widget_Base {
                     <div class="col-12 col-xl-6 text-center text-xl-end">
                         <div class="main-welcome__title mx-auto mx-xl-0">
                             <div class="mb-9">
-                                <h1 class="fw-800 mb-7"><?php echo $settings["hero_title"]; ?></h1>
-                                <p class="text-gray-200"><?php echo $settings["hero_description"]; ?></p>
+                                <h1 class="mb-7 hero-title"><?php echo $settings["hero_title"]; ?></h1>
+                                <p class="text-gray-200 hero-description"><?php echo $settings["hero_description"]; ?></p>
                             </div>
                             <div class="row">
                                 <div class="col-12 col-xl-6 mb-5 mb-xl-0">
@@ -308,7 +507,7 @@ class Elementor_Hero_Widget extends \Elementor\Widget_Base {
                                 </div>
                                 <div class="col-12 col-xl-6 align-self-center position-relative d-flex justify-content-center">
 
-                                    <a href="<?php echo $settings["hero_link"]['url']; ?>" class="btn text-secondary text-decoration-none d-flex align-items-center hover-link w-auto">
+                                    <a href="<?php echo $settings["hero_link"]['url']; ?>" class="hero-button btn text-secondary text-decoration-none d-flex align-items-center hover-link w-auto">
 										<span class="text"><?php echo $settings["hero_link_title"]; ?></span>
 										<span class="icon-arrow-left-line icon"></span>
 									</a>
