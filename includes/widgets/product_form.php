@@ -332,25 +332,43 @@ class Elementor_Product_Form_Widget extends \Elementor\Widget_Base {
                     <div class="col-12 col-xl-6">
                         <div class="product__gallery my-10">
                             <!-- Product Image -->
-                            <div class="product__gallery__image d-inline-block">
+                            <div class="product__gallery__image d-inline-block d-flex align-items-center justify-content-center">
 
 								<?php foreach ( $settings['product_variables'] as $index => $item ): ?>
 
 									<?php if($settings['product_variables'][$index]['product_image']['url']): ?>
 
-										<div class="slider<?php echo $index ?>" style="display:none">
+										<div id="slider<?php echo $index ?>" style="display:none">
 											<img class="w-100 " src="<?php echo esc_url($settings['product_variables'][$index]['product_image']['url']); ?>" alt="<?php echo esc_url($settings['product_variables'][$index]['product_image']['alt']); ?>" >
 										</div>
 
 									<?php else: ?>
 
-										<div class="slideshow-container slider<?php echo $index ?>">
-												<?php
-												foreach ( $settings['product_variables'][$index]['product_gallery'] as $image ) {
-													echo '<div class="mySlides"><img class="" src="' . esc_attr( $image['url'] ) . '"></div>';
-												}
-												?>
-										</div>
+										<div id="slider<?php echo $index ?>" class="product-viewer"></div>
+											<?php
+											foreach ( $settings['product_variables'][$index]['product_gallery'] as $image ) {
+												$image_path = pathinfo(parse_url($image['url'])['path'], PATHINFO_DIRNAME);
+												$file_prefix = pathinfo(parse_url($image['url'])['path'], PATHINFO_FILENAME);
+												$file_extension = pathinfo(parse_url($image['url'])['path'], PATHINFO_EXTENSION);
+												break;
+											}
+											?>
+										<script>
+											jQuery(document).ready(function() {
+												var productViewer<?php echo $index; ?> = new ProductViewer({
+													element: document.getElementById('slider<?php echo $index; ?>'),
+													imagePath: '<?php echo $image_path; ?>',
+													filePrefix: '<?php echo substr($file_prefix, 0, -2); ?>',
+													fileExtension: '.<?php echo $file_extension; ?>',
+													numberOfImages: <?php echo count($settings['product_variables'][$index]['product_gallery']); ?>
+												});
+
+												// Once loaded, trigger a 360 spin
+												productViewer<?php echo $index; ?>.once('loaded', function() {
+													productViewer<?php echo $index; ?>.animate360();
+												});
+											});
+										</script>
 
 									<?php endif; ?>
 
@@ -404,7 +422,7 @@ class Elementor_Product_Form_Widget extends \Elementor\Widget_Base {
 
                         <?php foreach ( $settings['product_variables'] as $index => $item ) { ?>
 							<?php if($settings['product_variables'][$index]['product_color_title']): ?>
-                            <button class="color-btn btn btn-gray-700 text-white-500 rounded-3 p-3 d-flex ms-3" id="slider<?php echo $index; ?>" data-title="<?php echo $settings['product_variables'][$index]['product_color_title']; ?>">
+                            <button class="color-btn btn btn-gray-700 text-white-500 rounded-3 p-3 d-flex ms-3" id="sliderBtn<?php echo $index; ?>" data-title="<?php echo $settings['product_variables'][$index]['product_color_title']; ?>">
                                 <span style="background-color: <?php echo $settings['product_variables'][$index]['product_color']; ?>" class="product__info__variables__colorIndicator"></span>
                                 <span><?php echo $settings['product_variables'][$index]['product_color_title']; ?></span>
                             </button>
@@ -461,31 +479,30 @@ class Elementor_Product_Form_Widget extends \Elementor\Widget_Base {
             </div>
         </section>
 
-		<section class="product_form_sticky">
 
-			<div class="row">
 
-				<div class="col-12 col-xl-6">	
-					<!-- Product Title -->
-					<div class="product__info__title mb-4">
-						<div class="d-flex align-items-center mb-5">
-							<span class="fs-2 mb-0 fw-800"><?php echo $product->get_title(); ?></span>
-						</div>
-						<span class="font-pinar fw-500 text-gray-200"><?php echo $settings['product_subtitle']; ?></span>
+		<div class="row" id="yourFixedDiv">
+
+			<div class="col-12 col-xl-6">	
+				<!-- Product Title -->
+				<div class="product__info__title mb-4">
+					<div class="d-flex align-items-center mb-5">
+						<span class="fs-2 mb-0 fw-800"><?php echo $product->get_title(); ?></span>
 					</div>
-
-					<div class="product__info__form__price">
-						<span class="font-pinar text-success-500 fs-2 fw-800"><?php echo number_format($product->get_price()) . ' تومان'; ?></span>
-					</div>
-
 				</div>
 
-				<div class="col-12 col-xl-6 d-flex align-items-center justify-content-end">
-					<button id="product_add_to_cart_sticky" type="submit" class="btn btn-primary text-white-500 p-4 rounded-4 w-50 fw-500">ثبت خرید</button>
+				<div class="product__info__form__price">
+					<span class="font-pinar text-success-500 fs-2 fw-800"><?php echo number_format($product->get_price()) . ' تومان'; ?></span>
 				</div>
+
 			</div>
 
-		</section>
+			<div class="col-12 col-xl-6 d-flex align-items-center justify-content-end">
+				<button id="product_add_to_cart_sticky" type="submit" class="btn btn-primary text-white-500 p-4 rounded-4 w-50 fw-500">ثبت خرید</button>
+			</div>
+		</div>
+
+
 
         <?php
     }

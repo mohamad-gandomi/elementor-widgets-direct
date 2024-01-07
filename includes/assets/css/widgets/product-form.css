@@ -55,41 +55,70 @@
     }
 }
 
-.product_form_sticky {
-    transition: all 0.5s ease;
-    top: 100%;
+/* Your CSS styles here */
+#yourFixedDiv {
     position: fixed;
-    background: white;
-    bottom: 0;
-    padding: 1em 2em;
+    bottom: -500px;
+    /* Initially hide the div */
+    left: 0;
+    right: 0;
+    background-color: #f1f1f1;
+    padding: 20px;
+    transition: bottom 0.3s ease-in-out;
     z-index: 99;
-    width: 100%;
-    opacity: 0;
 }
 
-.product_form_sticky.sticky {
-    top: 88%;
-    opacity: 1;
+#yourFixedDiv.show {
+    bottom: 0;
+    /* Show the div when the 'show' class is added */
 }
 
 @media only screen and (max-width: 768px) {
 
-    .product_form_sticky.sticky {
-        top: 80%;
-    }
-
-    .product_form_sticky.sticky .product__info__title span,
-    .product_form_sticky.sticky .product__info__form__price span {
+    #yourFixedDiv .product__info__title span,
+    #yourFixedDiv .product__info__form__price span {
         margin: 0 auto;
         font-size: 16px !important;
     }
 
-    .product_form_sticky.sticky .product__info__form__price {
+    #yourFixedDiv .product__info__form__price {
         margin-bottom: 1em;
         text-align: center;
     }
 
-    .product_form_sticky.sticky #product_add_to_cart_sticky {
+    #yourFixedDiv #product_add_to_cart_sticky {
         margin: 0 auto;
     }
+}
+
+.product-viewer {
+    overflow: hidden;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    cursor: -webkit-grab;
+    cursor: grab
+}
+
+.product-viewer__image {
+    max-width: 100%;
+}
+
+.product-viewer--js-press-active {
+    cursor: -webkit-grabbing;
+    cursor: grabbing
+}
+
+.product__info__variables .color-btn.selected {
+    border: 2px solid #257cff !important;
 }
